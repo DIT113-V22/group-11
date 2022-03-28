@@ -1,21 +1,17 @@
 # group-11
 
-Imagine you rob a bank, the plan goes perfectly and nobody manages to stop you while you exit the building with all the money you just proudly stole! BUT you missed one small detail of the robbery plan... THE GETAWAY !!! You did not think at all how you're going to escape town with you car and the police is everywhere and dont get me started on the civilians being all over the place!! You must now use your driving skills and prove worthy of all the money you just got and the title of the best robber of all time!!
-
-What you are going to make?
-Why will you make it?
-  What problem does it solve?
-How you are going to make it?
-  What kind of technology you are going to use?
-
+Imagine you rob a bank, the plan goes perfectly and nobody manages to stop you while you exit the building with all the money you just proudly stole. BUT you missed one small detail of the robbery plan... THE GETAWAY! You did not think about how you're going to escape town with your car at all and the police is everywhere. Dont even get me started on the civilians being all over the place! You must now use your driving skills and prove worthy of all the money you just got and the title of the best robber of all time.
 
 
 WHAT?
-Getaway car in obstacle themed track. The game starts at a bank that you robbed and you should reach your destination by avoiding obstacles on the track. You have a health bar that you should try to keep at 100%, this is done when you avoid all obstacles on the track. Losing health makes your car slow down, losing too much health makes you lose the game. The time you take to get to the destination will be stored and you have a time limit, if the time is over then you lose the game, so you should try to take as less time as possible to escape!
+We are making a getaway car that must avoid obstacles and reach the robbers hide out. The game starts at a bank that you robbed and you should reach your destination by avoiding obstacles on the track. You have a health bar that you should try to keep at 100%, this is done when you avoid all obstacles on the track. In addition to obstacles, we will also add boosters and powerups that allow the player(s) to either gain time or lives if collected. Losing lives makes your car slow down and once you lose all your lives, you lose the game. There will be different levels, and there is a time limit for each level. The time taken for you to finish that level will be recorded and if you exceed the time limit, you will lose the game. Hence your goal is to finish the level with as less time as possible and with atleast one lifeline. 
 
+Obtacles: pedestrians, cones, construction barricades, police car crossing the crowd.
 
-- Robber starts from a bank and ends with a destination
-- Time limit
-- Health bar: everytime you hit a obstacle or a civilian you loss points from your health
-- Championship (beat ur own highscore)
-- Why? Educational: teach people what is bad with driving. Traffic laws, don't hit civilians. 
+Boosters: speed up, barrier, additional time, extra life.
+
+WHY? 
+The purpose of this application is to entertain people with an educational perspective. We are targeting youth and want to promote safe driving in terms of not hitting the civilians. 
+
+HOW?
+We are going to use Arduino, SMCE, and Godot. We will create difficulty levels, each level will have a different amount of obstacles that the player will have to avoid. 
