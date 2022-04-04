@@ -4,7 +4,7 @@ Imagine you rob a bank, the plan goes perfectly and nobody manages to stop you w
 
 
 WHAT?
-We are making a getaway car that must avoid obstacles and reach the robbers hide out. The game starts at a bank that you robbed and you should reach your destination by avoiding obstacles on the track. You have a health bar that you should try to keep at 100%, this is done when you avoid all obstacles on the track. In addition to obstacles, we will also add boosters and powerups that allow the player(s) to either gain time or lives if collected. Losing lives makes your car slow down and once you lose all your lives, you lose the game. There will be different levels, and there is a time limit for each level. The time taken for you to finish that level will be recorded and if you exceed the time limit, you will lose the game. Hence your goal is to finish the level with as less time as possible and with atleast one lifeline. 
+We are making a getaway car that must avoid obstacles and reach the robbers hide out. The game starts at a bank that you robbed and you should reach your destination by avoiding obstacles on the track. You have a health bar that you should try to keep at 100%, this is done when you avoid all obstacles on the track. In addition to obstacles, we will also add boosters and powerups that allow the player(s) to either gain time or lives if collected. Losing lives makes your car slow down and once you lose all your lives, you lose the game. The time taken for you to finish the path will be recorded and if you exceed the time limit, you will lose the game. Hence your goal is to finish the level with as less time as possible and with atleast one lifeline. 
 
 Obtacles: pedestrians, cones, construction barricades, police car crossing the crowd.
 
@@ -14,4 +14,4 @@ WHY?
 The purpose of this application is to entertain people with an educational perspective. We are targeting youth and want to promote safe driving in terms of not hitting the civilians. 
 
 HOW?
-We are going to use Arduino, SMCE, and Godot. We will create difficulty levels, each level will have a different amount of obstacles that the player will have to avoid. 
+We are going to use Arduino, SMCE, and Godot. 
