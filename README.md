@@ -1,17 +1,23 @@
 # group-11
 
-Imagine you rob a bank, the plan goes perfectly and nobody manages to stop you while you exit the building with all the money you just proudly stole. BUT you missed one small detail of the robbery plan... THE GETAWAY! You did not think about how you're going to escape town with your car at all and the police is everywhere. Dont even get me started on the civilians being all over the place! You must now use your driving skills and prove worthy of all the money you just got and the title of the best robber of all time.
+
+# What 
+We are creating an application to drive the car maunally for seeking treasure(s). The car will be able to take multiple routes to find the treasure. The environment will consist of multiple objects/obstacles and one treasure. The user will be alerted when there is an object nearby and the car will be stopped if it gets too close to the object. The closer or further the car is from the treasure will be displayed on the app. The user will be able to view the car's speed and how much the car has travelled so far. The user will have a first person view (driver seat view). 
+
+# WHY?
+The purpose of our project is to entertain children, who love to seek treasure and drive cars. 
 
 
-WHAT?
-We are making a getaway car that must avoid obstacles and reach the robbers hide out. The game starts at a bank that you robbed and you should reach your destination by avoiding obstacles on the track. You have a health bar that you should try to keep at 100%, this is done when you avoid all obstacles on the track. In addition to obstacles, we will also add boosters and powerups that allow the player(s) to either gain time or lives if collected. Losing lives makes your car slow down and once you lose all your lives, you lose the game. The time taken for you to finish the path will be recorded and if you exceed the time limit, you will lose the game. Hence your goal is to finish the level with as less time as possible and with atleast one lifeline. 
+# HOW?
+ARDUINO is going to be used to code the software for the car
+ANDROID STUDIO to build and design the app
+MQTT to connect the app to the emulator
+SMCE is where the car itself and all its features will be implemented
+GODOT to modify the environment and add obstacles
 
-Obtacles: pedestrians, cones, construction barricades, police car crossing the crowd.
+# EXTRA (if we have extra time)
+- Rear camera view 
+- Random positions of the hidden object
+- Beeping noise with frequency increasing as we get closer to object 
 
-Boosters: speed up, barrier, additional time, extra life.
 
-WHY? 
-The purpose of this application is to entertain people with an educational perspective. We are targeting youth and want to promote safe driving in terms of not hitting the civilians. 
-
-HOW?
-We are going to use Arduino, SMCE, and Godot. 
