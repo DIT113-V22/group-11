@@ -2,7 +2,7 @@
 
 
 # WHAT? 
-We are creating an application to drive the car manually using a joystick. The car will be able to travel freely around the map. The user will be alerted when there is an object nearby through a pop up message on the app. If the car gets too close, the emergency break will be activated and the car will stop moving. The user will be able to view the car's speed and how much the car has travelled so far. The user will have a first person view (driver seat view and rear view).  
+We are creating an application to drive the car manually using a joystick. The car will be able to travel freely around the map. The user will be alerted when there is an object nearby through a pop up message on the app. If the car gets too close, the emergency break will be activated and the car will stop moving. The user will be able to view the car's speed and how much the car has travelled so far. The user will have a first person view(front camera).  
 
 # WHY?
 The purpose of our project is to entertain children, who love to drive cars. 
