@@ -14,7 +14,7 @@ MQTT to connect the app to the emulator
 SMCE is where the car itself and all its features will be implemented
 
 # EXTRA (if we have extra time)
-- Random positions of the hidden object
-- Beeping noise with frequency increasing as we get closer to object 
+- Beeping noise with frequency increasing as we get closer to object
+- Godot 
 
 
