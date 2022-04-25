@@ -1,0 +1,36 @@
+{
+  "slots": {
+    "Left": {
+      "class": "UltraSonic",
+      "name": "Left Ultrasound",
+      "props": {
+        "trigger_pin": 2,
+        "echo_pin": 3
+      }
+    },
+    "Right": {
+      "class": "UltraSonic",
+      "name": "Right Ultrasound",
+      "props": {
+        "trigger_pin": 4,
+        "echo_pin": 5
+      }
+    },
+    "FrontTop": {
+      "class": "UltraSonic",
+      "name": "Front Ultrasound",
+      "props": {
+        "trigger_pin": 6,
+        "echo_pin": 7
+      }
+    },
+    "Back": {
+      "class": "UltraSonic",
+      "name": "Back Ultrasound",
+      "props": {
+        "trigger_pin": 16,
+        "echo_pin": 17
+      }
+    }
+  }
+}
