@@ -5,7 +5,8 @@
       "name": "Left Ultrasound",
       "props": {
         "trigger_pin": 2,
-        "echo_pin": 3
+        "echo_pin": 3,
+        "rotation_degrees": "Vector3(0,-70,0)"
       }
     },
     "Right": {
@@ -13,7 +14,8 @@
       "name": "Right Ultrasound",
       "props": {
         "trigger_pin": 4,
-        "echo_pin": 5
+        "echo_pin": 5,
+        "rotation_degrees": "Vector3(0,70,0)"
       }
     },
     "FrontTop": {
