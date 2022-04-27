@@ -25,6 +25,7 @@ allprojects {
         jcenter()
     }
 }
+'io.github.controlwear:virtualjoystick:0.9.9'
 
 task clean(type: Delete) {
     delete rootProject.buildDir

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LittleDrivers</string>
+    <string name="cameraview">cameraView</string>
 </resources>
