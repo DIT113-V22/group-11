@@ -2,6 +2,7 @@ package com.example.littledrivers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,7 +11,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.zerokol.views.joystickView.JoystickView;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -37,9 +41,16 @@ public class MainActivity extends AppCompatActivity {
     private boolean isConnected = false;
     private ImageView mCameraView;
 
+    private TextView angleTextView;
+    private TextView powerTextView;
+    private TextView directionTextView;
+    // Importing also other views
+    private JoystickView joystick;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        JoystickView joystick = new JoystickView(this);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -50,6 +61,53 @@ public class MainActivity extends AppCompatActivity {
 
 
         connectToMqttBroker();
+
+        angleTextView = (TextView) findViewById(R.id.angleTextView);
+        powerTextView = (TextView) findViewById(R.id.powerTextView);
+        directionTextView = (TextView) findViewById(R.id.directionTextView);
+        //Referencing also other views
+        //joystick = (JoystickView) findViewById(R.id.joystickView);
+
+        //Event listener that always returns the variation of the angle in degrees, motion power in percentage and direction of movement
+        joystick.setOnJoystickMoveListener(new JoystickView.OnJoystickMoveListener() {
+
+            @Override
+            public void onValueChanged(int angle, int power, int direction) {
+                // TODO Auto-generated method stub
+                angleTextView.setText(" " + String.valueOf(angle) + "°");
+                powerTextView.setText(" " + String.valueOf(power) + "%");
+                switch (direction) {
+                    case JoystickView.FRONT:
+                        directionTextView.setText(R.string.front_lab);
+                        break;
+                    case JoystickView.FRONT_RIGHT:
+                        directionTextView.setText(R.string.front_right_lab);
+                        break;
+                    case JoystickView.RIGHT:
+                        directionTextView.setText(R.string.right_lab);
+                        break;
+                    case JoystickView.RIGHT_BOTTOM:
+                        directionTextView.setText(R.string.right_bottom_lab);
+                        break;
+                    case JoystickView.BOTTOM:
+                        directionTextView.setText(R.string.bottom_lab);
+                        break;
+                    case JoystickView.BOTTOM_LEFT:
+                        directionTextView.setText(R.string.bottom_left_lab);
+                        break;
+                    case JoystickView.LEFT:
+                        directionTextView.setText(R.string.left_lab);
+                        break;
+                    case JoystickView.LEFT_FRONT:
+                        directionTextView.setText(R.string.left_front_lab);
+                        break;
+                    default:
+                        directionTextView.setText(R.string.center_lab);
+                }
+            }
+        }, JoystickView.DEFAULT_LOOP_INTERVAL);
+
+
     }
 
     @Override
