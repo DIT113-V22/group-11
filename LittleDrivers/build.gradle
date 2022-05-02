@@ -27,6 +27,6 @@ allprojects {
 }
 'io.github.controlwear:virtualjoystick:0.9.9'
 
-task clean(type: Delete) {
+task clean(type: Delete) {2
     delete rootProject.buildDir
 }
