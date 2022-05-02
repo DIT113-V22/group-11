@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
         connectToMqttBroker();
 
-        angleTextView = (TextView) findViewById(R.id.angleTextView);
+       /* angleTextView = (TextView) findViewById(R.id.angleTextView);
         powerTextView = (TextView) findViewById(R.id.powerTextView);
-        directionTextView = (TextView) findViewById(R.id.directionTextView);
+        directionTextView = (TextView) findViewById(R.id.directionTextView);*/
         //Referencing also other views
         //joystick = (JoystickView) findViewById(R.id.joystickView);
 
