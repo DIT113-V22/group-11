@@ -6,17 +6,48 @@
     android:layout_height="match_parent"
     tools:context="com.example.littledrivers.MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="455dp"
-        android:layout_height="337dp"
-        android:layout_weight="0.3"
-        android:contentDescription="@string/cameraview"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:id="@+id/MainLinerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="268dp"
+        tools:layout_editor_absoluteY="71dp">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/InfoLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:id="@+id/tableLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+
+            <com.zerokol.views.joystickView.JoystickView
+                android:id="@+id/joystickView"
+                android:layout_width="288dp"
+                android:layout_height="217dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.968"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.731" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="455dp"
+                android:layout_height="337dp"
+                android:layout_weight="0.3"
+                android:contentDescription="@string/cameraview"
+                tools:layout_editor_absoluteX="22dp"
+                tools:layout_editor_absoluteY="22dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
