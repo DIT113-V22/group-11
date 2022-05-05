@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.zerokol.views.joystickView.JoystickView;
 
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -28,11 +29,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOCALHOST = "10.0.2.2";
     private static final String MQTT_SERVER = "tcp://" + LOCALHOST + ":1883";
     private static final String THROTTLE_CONTROL = "/smartcar/control/throttle";
-    private static final String STEERING_CONTROL = "/smartcar/control/steering";
-    private static final int MOVEMENT_SPEED = 70;
+    private static final String STEERING_CONTROL = "/samrtcar/control/steering";
+    private static final int MOVEMENT_SPEED = 50;
     private static final int IDLE_SPEED = 0;
     private static final int STRAIGHT_ANGLE = 0;
     private static final int STEERING_ANGLE = 50;
+    private static final int DIAGONAL = 20;
     private static final int QOS = 1;
     private static final int IMAGE_WIDTH = 320;
     private static final int IMAGE_HEIGHT = 240;
@@ -78,31 +80,31 @@ public class MainActivity extends AppCompatActivity {
                 powerTextView.setText(" " + String.valueOf(power) + "%");
                 switch (direction) {
                     case JoystickView.FRONT:
-                        directionTextView.setText(R.string.front_lab);
+                        drive(MOVEMENT_SPEED,STRAIGHT_ANGLE,"Moving Forward");
                         break;
                     case JoystickView.FRONT_RIGHT:
-                        directionTextView.setText(R.string.front_right_lab);
-                        break;
+                        drive(MOVEMENT_SPEED,DIAGONAL,"Moving Forward");
+                    break;
                     case JoystickView.RIGHT:
-                        directionTextView.setText(R.string.right_lab);
+                        drive(MOVEMENT_SPEED,STEERING_ANGLE,"Moving Forward");
                         break;
                     case JoystickView.RIGHT_BOTTOM:
-                        directionTextView.setText(R.string.right_bottom_lab);
+                        drive(-MOVEMENT_SPEED,DIAGONAL,"Moving Forward");
                         break;
                     case JoystickView.BOTTOM:
-                        directionTextView.setText(R.string.bottom_lab);
+                        drive(-MOVEMENT_SPEED,STRAIGHT_ANGLE,"Moving Backward");
                         break;
                     case JoystickView.BOTTOM_LEFT:
-                        directionTextView.setText(R.string.bottom_left_lab);
+                        drive(-MOVEMENT_SPEED,-DIAGONAL,"Moving Forward");
                         break;
                     case JoystickView.LEFT:
-                        directionTextView.setText(R.string.left_lab);
+                        drive(MOVEMENT_SPEED,-STEERING_ANGLE,"Moving Forward");
                         break;
                     case JoystickView.LEFT_FRONT:
-                        directionTextView.setText(R.string.left_front_lab);
+                        drive(MOVEMENT_SPEED,- DIAGONAL,"Moving ");
                         break;
                     default:
-                        directionTextView.setText(R.string.center_lab);
+                        drive(IDLE_SPEED,STRAIGHT_ANGLE,"Moving Forward");
                 }
             }
         }, JoystickView.DEFAULT_LOOP_INTERVAL);
@@ -203,6 +205,7 @@ public class MainActivity extends AppCompatActivity {
         mMqttClient.publish(THROTTLE_CONTROL, Integer.toString(throttleSpeed), QOS, null);
         mMqttClient.publish(STEERING_CONTROL, Integer.toString(steeringAngle), QOS, null);
     }
+
 
 
 }
