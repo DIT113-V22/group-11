@@ -43,8 +43,11 @@
                 android:layout_height="337dp"
                 android:layout_weight="0.3"
                 android:contentDescription="@string/cameraview"
-                tools:layout_editor_absoluteX="22dp"
-                tools:layout_editor_absoluteY="22dp" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.097"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

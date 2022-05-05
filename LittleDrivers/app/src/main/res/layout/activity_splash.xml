@@ -9,9 +9,15 @@
 
     <ProgressBar
         android:id="@+id/indeterminateBar"
-        android:layout_width="495dp"
-        android:layout_height="186dp"
-        android:layout_alignParentBottom="false"
-        android:layout_marginBottom="116dp" />
+        android:layout_width="146dp"
+        android:layout_height="97dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="301dp"
+        android:layout_marginTop="169dp"
+        android:layout_marginEnd="284dp"
+        android:layout_marginBottom="145dp" />
 
 </RelativeLayout>
