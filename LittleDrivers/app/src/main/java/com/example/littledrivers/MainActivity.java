@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int QOS = 1;
     private static final int IMAGE_WIDTH = 320;
     private static final int IMAGE_HEIGHT = 240;
+    private static final int DIAGONAL = 20;
+    int lastDirection = 0;
 
     private MqttClient mMqttClient;
     private boolean isConnected = false;
@@ -70,6 +72,41 @@ public class MainActivity extends AppCompatActivity {
             joystick.joyY();
             joystick.angle();
             joystick.distancia();
+
+
+                joystick.move(motionEvent);
+                joystick.joyX();
+                joystick.joyY();
+                joystick.angle();
+                joystick.distancia();
+
+                int direction = joystick.getDireccion();
+
+                if (lastDirection != direction) {
+                    lastDirection = direction;
+
+                    if (direction == JoystickJhr.STICK_UP) {
+                        drive(MOVEMENT_SPEED,STRAIGHT_ANGLE,"Moving Forward");
+                    } else if (direction == JoystickJhr.STICK_UPRIGHT) {
+                        drive(MOVEMENT_SPEED,DIAGONAL,"Moving Forward");
+                    } else if (direction == JoystickJhr.STICK_RIGHT) {
+                        drive(MOVEMENT_SPEED,STEERING_ANGLE,"Moving Forward");
+                    } else if (direction == JoystickJhr.STICK_DOWNRIGHT) {
+                        drive(-MOVEMENT_SPEED,DIAGONAL,"Moving Forward");
+                    } else if (direction == JoystickJhr.STICK_DOWN) {
+                        drive(-MOVEMENT_SPEED,STRAIGHT_ANGLE,"Moving Backward");
+                    } else if (direction == JoystickJhr.STICK_DOWNLEFT) {
+                        drive(-MOVEMENT_SPEED,-DIAGONAL,"Moving Forward");
+                    } else if (direction == JoystickJhr.STICK_LEFT) {
+                        drive(MOVEMENT_SPEED,-STEERING_ANGLE,"Moving Forward");
+                    } else if (direction == JoystickJhr.STICK_UPLEFT) {
+                        drive(MOVEMENT_SPEED,- DIAGONAL,"Moving ");
+                    } else if (direction == JoystickJhr.STICK_NONE){
+                        drive(IDLE_SPEED, STRAIGHT_ANGLE, "not moving the joystick"); }
+
+                }
+
+
 
 
        /* angleTextView = (TextView) findViewById(R.id.angleTextView);
