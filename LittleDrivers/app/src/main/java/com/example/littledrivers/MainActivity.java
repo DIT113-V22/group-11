@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.joystickjhr.JoystickJhr;
+
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         mMqttClient = new MqttClient(getApplicationContext(), MQTT_SERVER, TAG);
@@ -59,14 +61,29 @@ public class MainActivity extends AppCompatActivity {
 
         connectToMqttBroker();
 
+        final JoystickJhr joystick = findViewById(R.id.joystick);
+
+        joystick.setOnTouchListener((view, motionEvent) -> {
+
+            joystick.move(motionEvent);
+            joystick.joyX();
+            joystick.joyY();
+            joystick.angle();
+            joystick.distancia();
+
+
        /* angleTextView = (TextView) findViewById(R.id.angleTextView);
         powerTextView = (TextView) findViewById(R.id.powerTextView);
         directionTextView = (TextView) findViewById(R.id.directionTextView);*/
-        //Referencing also other views
-        //joystick = (JoystickView) findViewById(R.id.joystickView);
+            //Referencing also other views
+            //joystick = (JoystickView) findViewById(R.id.joystickView);
 
-        //Event listener that always returns the variation of the angle in degrees, motion power in percentage and direction of movement
+            //Event listener that always returns the variation of the angle in degrees, motion power in percentage and direction of movement
 
+
+            return true;
+        }
+    );
 
     }
 

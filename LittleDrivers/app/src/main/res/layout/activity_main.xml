@@ -26,8 +26,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"/>
 
-
-
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="455dp"
@@ -39,6 +37,32 @@
                 app:layout_constraintHorizontal_bias="0.097"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.joystickjhr.JoystickJhr
+                android:id="@+id/joystick"
+                android:layout_width="213dp"
+                android:layout_height="208dp"
+                android:layout_gravity="center_horizontal"
+                app:alphaCircleFirst="200"
+                app:alphaCircleSecond="255"
+                app:colorFirst="#2979FF"
+                app:colorSecond="#2979FF"
+                app:colorText="#D5D8E7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.969"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.866"
+                app:radioCircle="0.5"
+                app:relleno="true"
+                app:textJoy="Lets Go"
+                app:textSizeJoy="40"
+                app:xtextOffset="-38"
+                app:ytextOffset="-15"
+                tools:ignore="MissingClass">
+
+            </com.example.joystickjhr.JoystickJhr>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
