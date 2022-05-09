@@ -15,10 +15,10 @@ const char ssid[] = "***";
 const char pass[] = "****";
 
 
-const int fSpeed   = 70;  // 70% of the full speed forward
-const int bSpeed   = -70; // 70% of the full speed backward
-const int lDegrees = -75; // degrees to turn left
-const int rDegrees = 75;  // degrees to turn right
+const int fSpeed   = 50;  // 50% of the full speed forward
+const int bSpeed   = -50; // 50% of the full speed backward
+const int lDegrees = -50; // degrees to turn left
+const int rDegrees = 50;  // degrees to turn right
 const unsigned long transmissionInterval = 100; // In milliseconds
 
 ArduinoRuntime arduinoRuntime;
