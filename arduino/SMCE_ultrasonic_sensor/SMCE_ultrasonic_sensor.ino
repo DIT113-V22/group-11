@@ -101,11 +101,11 @@ Serial.println("Connecting to WiFi...");
     delay(1000);
   }
 
-  mqtt.subscribe("/smartcar/control/#", 1);
+  mqtt.subscribe("/LittleDrivers/control/#", 1);
   mqtt.onMessage([](String topic, String message) {
-    if (topic == "/smartcar/control/throttle") {
+    if (topic == "/LittleDrivers/control/throttle") {
       car.setSpeed(message.toInt());
-    } else if (topic == "/smartcar/control/steering") {
+    } else if (topic == "/LittleDrivers/control/steering") {
       car.setAngle(message.toInt());
     } else {
       Serial.println(topic + " " + message);
@@ -132,7 +132,7 @@ if (mqtt.connected()) {
     if (currentTime - previousFrame >= 65) {
       previousFrame = currentTime;
       Camera.readFrame(frameBuffer.data());
-      mqtt.publish("/smartcar/camera", frameBuffer.data(), frameBuffer.size(),
+      mqtt.publish("/LittleDrivers/camera", frameBuffer.data(), frameBuffer.size(),
                    false, 0);
     }
 #endif
@@ -140,7 +140,7 @@ if (mqtt.connected()) {
     if (currentTime - previousTransmission >= oneSecond) {
       previousTransmission = currentTime;
       const auto distance = String(front.getDistance());
-            mqtt.publish("/smartcar/ultrasound/front", distance);
+            mqtt.publish("/LittleDrivers/ultrasound/front", distance);
           }
         }
 
