@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int IMAGE_HEIGHT = 240;
     private static final int DIAGONAL = 20;
     int lastDirection = 0;
+    boolean insideRangeF = false;
+    boolean insideRangeB = false;
+    boolean insideRangeR = false;
+    boolean insideRangeL = false;
 
     private MqttClient mMqttClient;
     private boolean isConnected = false;
@@ -67,44 +71,154 @@ public class MainActivity extends AppCompatActivity {
 
         joystick.setOnTouchListener((view, motionEvent) -> {
 
-            joystick.move(motionEvent);
-            joystick.joyX();
-            joystick.joyY();
-            joystick.angle();
-            joystick.distancia();
+                    joystick.move(motionEvent);
+                    joystick.joyX();
+                    joystick.joyY();
+                    joystick.angle();
+                    joystick.distancia();
 
 
-                joystick.move(motionEvent);
-                joystick.joyX();
-                joystick.joyY();
-                joystick.angle();
-                joystick.distancia();
+                    joystick.move(motionEvent);
+                    joystick.joyX();
+                    joystick.joyY();
+                    joystick.angle();
+                    joystick.distancia();
 
-                int direction = joystick.getDireccion();
+                    int direction = joystick.getDireccion();
 
-                if (lastDirection != direction) {
-                    lastDirection = direction;
+                    if (lastDirection != direction) {
+                        lastDirection = direction;
 
-                    if (direction == JoystickJhr.STICK_UP) {
-                        drive(MOVEMENT_SPEED,STRAIGHT_ANGLE,"Moving Forward");
-                    } else if (direction == JoystickJhr.STICK_UPRIGHT) {
-                        drive(MOVEMENT_SPEED,DIAGONAL,"Moving Forward");
-                    } else if (direction == JoystickJhr.STICK_RIGHT) {
-                        drive(MOVEMENT_SPEED,STEERING_ANGLE,"Moving Forward");
-                    } else if (direction == JoystickJhr.STICK_DOWNRIGHT) {
-                        drive(-MOVEMENT_SPEED,DIAGONAL,"Moving Forward");
-                    } else if (direction == JoystickJhr.STICK_DOWN) {
-                        drive(-MOVEMENT_SPEED,STRAIGHT_ANGLE,"Moving Backward");
-                    } else if (direction == JoystickJhr.STICK_DOWNLEFT) {
-                        drive(-MOVEMENT_SPEED,-DIAGONAL,"Moving Forward");
-                    } else if (direction == JoystickJhr.STICK_LEFT) {
-                        drive(MOVEMENT_SPEED,-STEERING_ANGLE,"Moving Forward");
-                    } else if (direction == JoystickJhr.STICK_UPLEFT) {
-                        drive(MOVEMENT_SPEED,- DIAGONAL,"Moving ");
-                    } else if (direction == JoystickJhr.STICK_NONE){
-                        drive(IDLE_SPEED, STRAIGHT_ANGLE, "not moving the joystick"); }
 
-                }
+
+                        if (direction == JoystickJhr.STICK_UP) {
+                            if(insideRangeF) {
+                                drive(IDLE_SPEED, STRAIGHT_ANGLE, "Obstacle nearby");
+                            } else if (!insideRangeF){
+                                drive(MOVEMENT_SPEED, STRAIGHT_ANGLE, "Moving Forward");
+                            }
+                            if(insideRangeB || insideRangeL || insideRangeR){
+                                insideRangeB=false;
+                                insideRangeL=false;
+                                insideRangeR=false;
+                                mMqttClient.publish("/LittleDrivers/insiderange/back","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/left","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/right","false", QOS, null );
+                            }
+
+
+                        } else if (direction == JoystickJhr.STICK_UPRIGHT) {
+                            if(insideRangeF || insideRangeR){
+                                drive(IDLE_SPEED, STRAIGHT_ANGLE, "Obstacle nearby");
+                            } else if (!insideRangeF && !insideRangeR){
+                                drive(MOVEMENT_SPEED, DIAGONAL, "Moving Forward");
+                            }
+                            if(insideRangeB || insideRangeL){
+                                insideRangeB=false;
+                                insideRangeL=false;
+                                mMqttClient.publish("/LittleDrivers/insiderange/back","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/left","false", QOS, null );
+                            }
+
+
+                        } else if (direction == JoystickJhr.STICK_RIGHT) {
+                            if(insideRangeR){
+                                drive(IDLE_SPEED, STRAIGHT_ANGLE, "Obstacle nearby");
+                            } else if (!insideRangeR){
+                                drive(MOVEMENT_SPEED, STEERING_ANGLE, "Moving Forward");
+                            }
+                            if(insideRangeL || insideRangeB){
+                                insideRangeL=false;
+                                insideRangeB=false;
+                                mMqttClient.publish("/LittleDrivers/insiderange/left","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/back","false", QOS, null );
+                            }
+
+
+                        } else if (direction == JoystickJhr.STICK_DOWNRIGHT) {
+
+                            if(insideRangeB){
+                                drive(IDLE_SPEED, STRAIGHT_ANGLE, "Obstacle nearby");
+                            } else if (!insideRangeB){
+                                drive(-MOVEMENT_SPEED, DIAGONAL, "Moving Forward");
+                            }
+                            if(insideRangeF || insideRangeR || insideRangeL){
+                                insideRangeF=false;
+                                insideRangeR=false;
+                                insideRangeL=false;
+                                mMqttClient.publish("/LittleDrivers/insiderange/front","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/right","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/left","false", QOS, null );
+                            }
+
+
+                        } else if (direction == JoystickJhr.STICK_DOWN) {
+                            if(insideRangeB){
+                                drive(IDLE_SPEED, STRAIGHT_ANGLE, "Obstacle nearby");
+                            } else if (!insideRangeB){
+                                drive(-MOVEMENT_SPEED, STRAIGHT_ANGLE, "Moving Backward");
+                            }
+                            if(insideRangeF || insideRangeL || insideRangeR){
+                                insideRangeF=false;
+                                insideRangeL=false;
+                                insideRangeR=false;
+                                mMqttClient.publish("/LittleDrivers/insiderange/front","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/left","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/right","false", QOS, null );
+                            }
+
+
+                        } else if (direction == JoystickJhr.STICK_DOWNLEFT) {
+                            if(insideRangeB){
+                                drive(IDLE_SPEED, STRAIGHT_ANGLE, "Obstacle nearby");
+                            } else if (!insideRangeB){
+                                drive(-MOVEMENT_SPEED, -DIAGONAL, "Moving Forward");
+                            }
+                            if(insideRangeF || insideRangeR || insideRangeL){
+                                insideRangeF=false;
+                                insideRangeR=false;
+                                insideRangeL=false;
+                                mMqttClient.publish("/LittleDrivers/insiderange/front","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/right","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/left","false", QOS, null );
+                            }
+
+
+                        } else if (direction == JoystickJhr.STICK_LEFT) {
+                            if(insideRangeL){
+                                drive(IDLE_SPEED, STRAIGHT_ANGLE, "Obstacle nearby");
+                            } else if (!insideRangeL){
+                                drive(MOVEMENT_SPEED, -STEERING_ANGLE, "Moving Forward");
+                            }
+                            if(insideRangeR || insideRangeB){ //maybe remove F
+                                insideRangeR=false;
+                                insideRangeB=false;
+                                mMqttClient.publish("/LittleDrivers/insiderange/right","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/back","false", QOS, null );
+                            }
+
+
+
+
+                        } else if (direction == JoystickJhr.STICK_UPLEFT) {
+                            if(insideRangeF || insideRangeL){
+                                drive(IDLE_SPEED, STRAIGHT_ANGLE, "Obstacle nearby");
+                            } else if (!insideRangeF && !insideRangeL){
+                                drive(MOVEMENT_SPEED, -DIAGONAL, "Moving ");
+                            }
+                            if(insideRangeB || insideRangeR){
+                                insideRangeB=false;
+                                insideRangeR=false;
+                                mMqttClient.publish("/LittleDrivers/insiderange/back","false", QOS, null );
+                                mMqttClient.publish("/LittleDrivers/insiderange/right","false", QOS, null );
+                            }
+
+
+                        } else if (direction == JoystickJhr.STICK_NONE) {
+                            drive(IDLE_SPEED, STRAIGHT_ANGLE, "not moving the joystick");
+                        }
+
+                    }
 
 
 
@@ -112,15 +226,15 @@ public class MainActivity extends AppCompatActivity {
        /* angleTextView = (TextView) findViewById(R.id.angleTextView);
         powerTextView = (TextView) findViewById(R.id.powerTextView);
         directionTextView = (TextView) findViewById(R.id.directionTextView);*/
-            //Referencing also other views
-            //joystick = (JoystickView) findViewById(R.id.joystickView);
+                    //Referencing also other views
+                    //joystick = (JoystickView) findViewById(R.id.joystickView);
 
-            //Event listener that always returns the variation of the angle in degrees, motion power in percentage and direction of movement
+                    //Event listener that always returns the variation of the angle in degrees, motion power in percentage and direction of movement
 
 
-            return true;
-        }
-    );
+                    return true;
+                }
+        );
 
     }
 
@@ -160,6 +274,8 @@ public class MainActivity extends AppCompatActivity {
 
                     mMqttClient.subscribe("/LittleDrivers/ultrasound/front", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/camera", QOS, null);
+                    mMqttClient.subscribe("/LittleDrivers/insiderange/#", QOS, null);
+
                 }
 
                 @Override
@@ -193,7 +309,15 @@ public class MainActivity extends AppCompatActivity {
                         }
                         bm.setPixels(colors, 0, IMAGE_WIDTH, 0, 0, IMAGE_WIDTH, IMAGE_HEIGHT);
                         mCameraView.setImageBitmap(bm);
-                    } else {
+                    } else if (topic.equals("/LittleDrivers/insiderange/front") && message.toString().equals("true")) {
+                        insideRangeF = true;
+                    } else if (topic.equals("/LittleDrivers/insiderange/back") && message.toString().equals("true")) {
+                        insideRangeB = true;
+                    } else if (topic.equals("/LittleDrivers/insiderange/left") && message.toString().equals("true")) {
+                        insideRangeL = true;
+                    } else if (topic.equals("/LittleDrivers/insiderange/right") && message.toString().equals("true")) {
+                        insideRangeR = true;
+                    }else {
                         Log.i(TAG, "[MQTT] Topic: " + topic + " | Message: " + message.toString());
                     }
                 }
