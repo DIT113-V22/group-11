@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "SmartcarMqttController";
     private static final String LOCALHOST = "10.0.2.2";
     private static final String MQTT_SERVER = "tcp://" + LOCALHOST + ":1883";
-    private static final String THROTTLE_CONTROL = "/smartcar/control/throttle";
-    private static final String STEERING_CONTROL = "/smartcar/control/steering";
+    private static final String THROTTLE_CONTROL = "/LittleDrivers/control/throttle";
+    private static final String STEERING_CONTROL = "/LittleDrivers/control/steering";
     private static final int MOVEMENT_SPEED = 70;
     private static final int IDLE_SPEED = 0;
     private static final int STRAIGHT_ANGLE = 0;
@@ -158,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, successfulConnection);
                     Toast.makeText(getApplicationContext(), successfulConnection, Toast.LENGTH_SHORT).show();
 
-                    mMqttClient.subscribe("/smartcar/ultrasound/front", QOS, null);
-                    mMqttClient.subscribe("/smartcar/camera", QOS, null);
+                    mMqttClient.subscribe("/LittleDrivers/ultrasound/front", QOS, null);
+                    mMqttClient.subscribe("/LittleDrivers/camera", QOS, null);
                 }
 
                 @Override
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void messageArrived(String topic, MqttMessage message) throws Exception {
-                    if (topic.equals("/smartcar/camera")) {
+                    if (topic.equals("/LittleDrivers/camera")) {
                         final Bitmap bm = Bitmap.createBitmap(IMAGE_WIDTH, IMAGE_HEIGHT, Bitmap.Config.ARGB_8888);
 
                         final byte[] payload = message.getPayload();
