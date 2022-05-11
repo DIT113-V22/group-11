@@ -22,4 +22,4 @@ jobs:
           arduino-cli lib install "Smartcar shield"
       - name: Build sketch
         run: |
-          arduino-cli compile -b esp32:esp32:esp32doit-devkit-v1 arduino/smartcar/smartcar.ino
+          arduino-cli compile -b esp32:esp32:esp32doit-devkit-v1 arduino/SMCE_ultrasonic_sensor/SMCE_ultrasonic_sensor.ino
