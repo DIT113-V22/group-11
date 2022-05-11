@@ -100,13 +100,36 @@ Serial.println("Connecting to WiFi...");
     Serial.print(".");
     delay(1000);
   }
+mqtt.subscribe("/LittleDrivers/insiderange/#", 1);
+mqtt.subscribe("/LittleDrivers/control/#", 1);
 
-  mqtt.subscribe("/LittleDrivers/control/#", 1);
-  mqtt.onMessage([](String topic, String message) {
+mqtt.onMessage([](String topic, String message) {
+
+
     if (topic == "/LittleDrivers/control/throttle") {
       car.setSpeed(message.toInt());
     } else if (topic == "/LittleDrivers/control/steering") {
       car.setAngle(message.toInt());
+    } else if(topic=="/LittleDrivers/insiderange/front"){
+           if(message.equals("false")){
+                delay(1000);
+                insideRangeF=false;
+                }
+    } else if(topic=="/LittleDrivers/insiderange/back"){
+            if(message.equals("false")){
+                delay(1000);
+                insideRangeB=false;
+                }
+    } else if(topic=="/LittleDrivers/insiderange/left"){
+            if(message.equals("false")){
+                delay(1000);
+                insideRangeL=false;
+                }
+    } else if(topic=="/LittleDrivers/insiderange/right"){
+            if(message.equals("false")){
+                delay(1000);
+                insideRangeR=false;
+                }
     } else {
       Serial.println(topic + " " + message);
     }
@@ -114,15 +137,13 @@ Serial.println("Connecting to WiFi...");
 
 }
 
-
-
 void loop()
 {
 
 const auto fdistance = front.getDistance();
-       const auto bdistance = back.getDistance();
-       const auto rdistance = right.getDistance();
-       const auto ldistance = left.getDistance();
+const auto bdistance = back.getDistance();
+const auto rdistance = right.getDistance();
+const auto ldistance = left.getDistance();
 
 if (mqtt.connected()) {
     mqtt.loop();
@@ -146,11 +167,9 @@ if (mqtt.connected()) {
 
 
 
-  // When distance is `0` it means there's no obstacle detected
-
 //THIS IS FOR THE ODOMETER
 
-Serial.print(String(leftOdometer.getDistance()/100) + " m");
+/*Serial.print(String(leftOdometer.getDistance()/100) + " m");
     Serial.print("\t\t");
     Serial.println(String(rightOdometer.getDistance()/100) + " m");
 
@@ -178,32 +197,29 @@ Serial.print(String(leftOdometer.getDistance()/100) + " m");
 //THIS IS TO PRINT THE ULTRASONIC SENSORS
 
 
-
-if (fdistance > 0 && fdistance < 100) {
+if (fdistance > 0 && fdistance < 100 && insideRangeF==false) {
    car.setSpeed(0);
    insideRangeF = true;
+   mqtt.publish("/LittleDrivers/insiderange/front", "true");
+   }
 
-}
+if (bdistance > 0 && bdistance < 100 && insideRangeB==false) {
+   car.setSpeed(0);
+   insideRangeB = true;
+   mqtt.publish("/LittleDrivers/insiderange/back", "true");
+   }
 
-
-
-    if (bdistance > 0 && bdistance < 100) {
-        car.setSpeed(0);
-        insideRangeB = true;
-
-
+if (rdistance > 0 && rdistance < 100 && insideRangeR==false) {
+    car.setSpeed(0);
+    insideRangeR = true;
+    mqtt.publish("/LittleDrivers/insiderange/right", "true");
     }
 
-     if (rdistance > 0 && rdistance < 60) {
-            car.setSpeed(0);
-            insideRangeR = true;
-        }
-
-       if (ldistance > 0 && ldistance < 60) {
-                    car.setSpeed(0);
-                    insideRangeL = true;
-
-                }
+if (ldistance > 0 && ldistance < 200 && insideRangeL==false) {
+    car.setSpeed(0);
+    insideRangeL = true;
+    mqtt.publish("/LittleDrivers/insiderange/left", "true");
+    }
 
 handleInput();
   
