@@ -197,25 +197,25 @@ if (mqtt.connected()) {
 //THIS IS TO PRINT THE ULTRASONIC SENSORS
 
 
-if (fdistance > 0 && fdistance < 100 && insideRangeF==false) {
+if (fdistance > 0 && fdistance < 90 && insideRangeF==false) {
    car.setSpeed(0);
    insideRangeF = true;
    mqtt.publish("/LittleDrivers/insiderange/front", "true");
    }
 
-if (bdistance > 0 && bdistance < 100 && insideRangeB==false) {
+if (bdistance > 0 && bdistance < 90 && insideRangeB==false) {
    car.setSpeed(0);
    insideRangeB = true;
    mqtt.publish("/LittleDrivers/insiderange/back", "true");
    }
 
-if (rdistance > 0 && rdistance < 100 && insideRangeR==false) {
+if (rdistance > 0 && rdistance < 60 && insideRangeR==false) {
     car.setSpeed(0);
     insideRangeR = true;
     mqtt.publish("/LittleDrivers/insiderange/right", "true");
     }
 
-if (ldistance > 0 && ldistance < 200 && insideRangeL==false) {
+if (ldistance > 0 && ldistance < 60 && insideRangeL==false) {
     car.setSpeed(0);
     insideRangeL = true;
     mqtt.publish("/LittleDrivers/insiderange/left", "true");
@@ -245,6 +245,18 @@ void handleInput()
 
         switch (input)
         {
+         case 'u': // change speed to 30
+                    car.setSpeed(30);
+                  Serial.println("The speed of the car has been set to 30!");
+                break;
+                case 'i': // change speed to 50
+                  car.setSpeed(50);
+                  Serial.println("The speed of the car has been set to 50!");
+                break;
+                case 'o': // change speed to 70
+                  car.setSpeed(70);
+                  Serial.println("The speed of the car has been set to 70!");
+                break;
         case 'a': // rotate counter-clockwise going forward
         if(insideRangeL==true || insideRangeF==true){
                 car.setSpeed(0);
