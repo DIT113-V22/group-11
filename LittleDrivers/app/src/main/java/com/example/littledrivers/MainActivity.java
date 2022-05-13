@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView angleTextView;
     private TextView powerTextView;
     private TextView directionTextView;
+    private TextView warningMessage;
     // Importing also other views
 
 
@@ -63,14 +64,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mMqttClient = new MqttClient(getApplicationContext(), MQTT_SERVER, TAG);
         mCameraView = findViewById(R.id.imageView);
-
+        warningMessage = findViewById(R.id.WarningMessage);
+        warningMessage.setVisibility(View.INVISIBLE);
 
         connectToMqttBroker();
 
         final JoystickJhr joystick = findViewById(R.id.joystick);
 
         joystick.setOnTouchListener((view, motionEvent) -> {
-
+                    if(insideRangeR || insideRangeB || insideRangeL || insideRangeF){
+                        warningMessage.setVisibility(View.VISIBLE);
+                    } else {
+                        warningMessage.setVisibility(View.INVISIBLE);
+                    }
                     joystick.move(motionEvent);
                     joystick.joyX();
                     joystick.joyY();
@@ -190,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                             } else if (!insideRangeL){
                                 drive(MOVEMENT_SPEED, -STEERING_ANGLE, "Moving Forward");
                             }
-                            if(insideRangeR || insideRangeB){ //maybe remove F
+                            if(insideRangeR || insideRangeB){
                                 insideRangeR=false;
                                 insideRangeB=false;
                                 mMqttClient.publish("/LittleDrivers/insiderange/right","false", QOS, null );
