@@ -17,5 +17,7 @@
     <string name="rights_lab">http://zerokol.com</string>
     <string name="warning_obstacle_nearby">Warning!! Obstacle nearby!!</string>
     <string name="textview">TextView</string>
+    <string name="distance">distance</string>
+    <string name="distancetext">Distance:</string>
     <string name="Hello">Hello</string>
 </resources>
