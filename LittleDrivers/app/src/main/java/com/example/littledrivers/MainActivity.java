@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView powerTextView;
     private TextView directionTextView;
     private TextView warningMessage;
+    TextView speedTextView;
+    EditText SpeedTextView;
+    String speed;
+
     // Importing also other views
 
 
@@ -66,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         mCameraView = findViewById(R.id.imageView);
         warningMessage = findViewById(R.id.WarningMessage);
         warningMessage.setVisibility(View.INVISIBLE);
+        speedTextView = findViewById(R.id.speedView);
 
         connectToMqttBroker();
 
@@ -281,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
                     mMqttClient.subscribe("/LittleDrivers/ultrasound/front", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/camera", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/insiderange/#", QOS, null);
+                    mMqttClient.subscribe("/LittleDrivers/Odometer/speed", QOS, null);
 
                 }
 
@@ -323,7 +330,12 @@ public class MainActivity extends AppCompatActivity {
                         insideRangeL = true;
                     } else if (topic.equals("/LittleDrivers/insiderange/right") && message.toString().equals("true")) {
                         insideRangeR = true;
-                    }else {
+                    } else if (topic.equals("/LittleDrivers/Odometer/speed")){
+                            speed = message.toString();
+                            speedTextView.setText(speed);
+
+
+                    } else {
                         Log.i(TAG, "[MQTT] Topic: " + topic + " | Message: " + message.toString());
                     }
                 }
