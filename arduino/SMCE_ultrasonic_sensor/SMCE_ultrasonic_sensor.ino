@@ -144,6 +144,8 @@ const auto fdistance = front.getDistance();
 const auto bdistance = back.getDistance();
 const auto rdistance = right.getDistance();
 const auto ldistance = left.getDistance();
+String speed = "";
+String distance = "";
 
 if (mqtt.connected()) {
     mqtt.loop();
@@ -162,9 +164,13 @@ if (mqtt.connected()) {
       previousTransmission = currentTime;
       const auto distance = String(front.getDistance());
             mqtt.publish("/LittleDrivers/ultrasound/front", distance);
-            mqtt.publish("/LittleDrivers/Odometer/speed",String(leftOdometer.getSpeed()));
           }
         }
+
+ speed = String(leftOdometer.getSpeed());
+ mqtt.publish("/LittleDrivers/Odometer/speed",speed);
+ distance = String (leftOdometer.getDistance()/100);
+ mqtt.publish("/LittleDrivers/odometer/distance", distance);
 
 
 
@@ -177,8 +183,6 @@ if (mqtt.connected()) {
     Serial.println(String(leftOdometer.getSpeed()) + " m/s");
     Serial.print("\t\t");
     Serial.println(String(rightOdometer.getSpeed()) + " m/s");
-
-    /*
     Serial.println(odometer.getDistance());
         delay(100);*/
 //THIS IS FOR THE ODOMETER

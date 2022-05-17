@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     boolean insideRangeB = false;
     boolean insideRangeR = false;
     boolean insideRangeL = false;
+    String speed;
+    String distance;
 
     private MqttClient mMqttClient;
     private boolean isConnected = false;
@@ -52,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView powerTextView;
     private TextView directionTextView;
     private TextView warningMessage;
-    TextView speedTextView;
-    EditText SpeedTextView;
-    String speed;
+    private TextView speedTextView;
+    private TextView distanceTextView;
+
 
     // Importing also other views
 
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         warningMessage = findViewById(R.id.WarningMessage);
         warningMessage.setVisibility(View.INVISIBLE);
         speedTextView = findViewById(R.id.speedView);
+        distanceTextView = findViewById(R.id.distanceView);
 
         connectToMqttBroker();
 
@@ -288,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
                     mMqttClient.subscribe("/LittleDrivers/camera", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/insiderange/#", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/Odometer/speed", QOS, null);
+                    mMqttClient.subscribe("/LittleDrivers/odometer/distance", QOS, null);
 
                 }
 
@@ -333,8 +337,9 @@ public class MainActivity extends AppCompatActivity {
                     } else if (topic.equals("/LittleDrivers/Odometer/speed")){
                             speed = message.toString();
                             speedTextView.setText(speed);
-
-
+                    } else if (topic.equals("/LittleDrivers/odometer/distance")) {
+                        distance = message.toString();
+                        distanceTextView.setText(distance);
                     } else {
                         Log.i(TAG, "[MQTT] Topic: " + topic + " | Message: " + message.toString());
                     }
