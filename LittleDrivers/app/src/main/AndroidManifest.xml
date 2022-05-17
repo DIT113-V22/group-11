@@ -13,6 +13,7 @@
             android:screenOrientation="landscape">
         </activity>
 
+
         <activity android:name="com.example.littledrivers.SplashActivity"
             android:screenOrientation="landscape"
 
