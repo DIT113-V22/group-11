@@ -162,6 +162,7 @@ if (mqtt.connected()) {
       previousTransmission = currentTime;
       const auto distance = String(front.getDistance());
             mqtt.publish("/LittleDrivers/ultrasound/front", distance);
+            mqtt.publish("/LittleDrivers/Odometer/speed",String(leftOdometer.getSpeed()));
           }
         }
 
