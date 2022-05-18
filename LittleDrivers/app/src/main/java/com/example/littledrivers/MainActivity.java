@@ -10,8 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView powerTextView;
     private TextView directionTextView;
     private TextView warningMessage;
+    private Switch safeDrive;
     private TextView speedTextView;
     private TextView distanceTextView;
-
 
     // Importing also other views
 
@@ -75,10 +76,26 @@ public class MainActivity extends AppCompatActivity {
         warningMessage.setVisibility(View.INVISIBLE);
         speedTextView = findViewById(R.id.speedView);
         distanceTextView = findViewById(R.id.distanceView);
-
+        safeDrive = (Switch) findViewById(R.id.safeDrive);
         connectToMqttBroker();
 
         final JoystickJhr joystick = findViewById(R.id.joystick);
+
+        safeDrive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                if (safeDrive.isChecked()) {
+                    mMqttClient.publish("/LittleDrivers/obstacleAvoidance/toggle", "true", QOS, null);
+                } else if (!safeDrive.isChecked()) {
+                    mMqttClient.publish("/LittleDrivers/obstacleAvoidance/toggle", "false", QOS, null);
+                }
+            }
+        });
+
+
+
+
 
         joystick.setOnTouchListener((view, motionEvent) -> {
                     if(insideRangeR || insideRangeB || insideRangeL || insideRangeF){
@@ -91,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
                     joystick.joyY();
                     joystick.angle();
                     joystick.distancia();
-
 
                     joystick.move(motionEvent);
                     joystick.joyX();
@@ -292,7 +308,6 @@ public class MainActivity extends AppCompatActivity {
                     mMqttClient.subscribe("/LittleDrivers/insiderange/#", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/Odometer/speed", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/odometer/distance", QOS, null);
-
                 }
 
                 @Override
@@ -335,8 +350,8 @@ public class MainActivity extends AppCompatActivity {
                     } else if (topic.equals("/LittleDrivers/insiderange/right") && message.toString().equals("true")) {
                         insideRangeR = true;
                     } else if (topic.equals("/LittleDrivers/Odometer/speed")){
-                            speed = message.toString();
-                            speedTextView.setText(speed);
+                        speed = message.toString();
+                        speedTextView.setText(speed);
                     } else if (topic.equals("/LittleDrivers/odometer/distance")) {
                         distance = message.toString();
                         distanceTextView.setText(distance);
