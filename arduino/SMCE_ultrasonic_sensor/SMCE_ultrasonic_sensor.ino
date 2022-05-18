@@ -8,46 +8,22 @@
 
 #include <Smartcar.h>
 
+// ------- Variable declaration -------
 MQTTClient mqtt;
 WiFiClient net;
 
 const char ssid[] = "***";
 const char pass[] = "****";
 
-
 const int fSpeed   = 50;  // 50% of the full speed forward
 const int bSpeed   = -50; // 50% of the full speed backward
 const int lDegrees = -50; // degrees to turn left
 const int rDegrees = 50;  // degrees to turn right
 const unsigned long transmissionInterval = 100; // In milliseconds
-
-ArduinoRuntime arduinoRuntime;
-BrushedMotor leftMotor{arduinoRuntime, smartcarlib::pins::v2::leftMotorPins};
-BrushedMotor rightMotor{arduinoRuntime, smartcarlib::pins::v2::rightMotorPins};
-DifferentialControl control{leftMotor, rightMotor};
-
-// THIS IS FOR THE ODOMETER
-/*const unsigned short odometerPin   = 2;
-const unsigned long pulsesPerMeter = 400;
-DirectionlessOdometer odometer{
-    arduinoRuntime, odometerPin, []() { odometer.update(); }, pulsesPerMeter
-};*/
 const auto pulsesPerMeter = 600;
-DirectionlessOdometer leftOdometer{ arduinoRuntime,
-                                    smartcarlib::pins::v2::leftOdometerPin,
-                                    []() { leftOdometer.update(); },
-                                    pulsesPerMeter };
-DirectionlessOdometer rightOdometer{ arduinoRuntime,
-                                     smartcarlib::pins::v2::rightOdometerPin,
-                                     []() { rightOdometer.update(); },
-                                     pulsesPerMeter };
-// THIS IS FOR THE ODOMETER
-SimpleCar car(control);
 
 const auto oneSecond = 1000UL;
 #ifdef __SMCE__
-const int triggerPin           = 6; // D6
-const int echoPin              = 7; // D7
 const auto mqttBrokerUrl = "127.0.0.1";
 #else
 const auto triggerPin = 33;
@@ -56,20 +32,28 @@ const auto mqttBrokerUrl = "192.168.0.40";
 #endif
 const unsigned int maxDistance = 100;
 
-
 bool insideRangeF = false;
 bool insideRangeB = false;
 bool insideRangeR = false;
 bool insideRangeL = false;
 bool toggleOn = false;
 
+std::vector<char> frameBuffer;
+
+//------- Car instantiation -------
+ArduinoRuntime arduinoRuntime;
+BrushedMotor leftMotor{arduinoRuntime, smartcarlib::pins::v2::leftMotorPins};
+BrushedMotor rightMotor{arduinoRuntime, smartcarlib::pins::v2::rightMotorPins};
+DifferentialControl control{leftMotor, rightMotor};
+DirectionlessOdometer leftOdometer{arduinoRuntime, smartcarlib::pins::v2::leftOdometerPin, [](){leftOdometer.update();},pulsesPerMeter};
+DirectionlessOdometer rightOdometer{arduinoRuntime,smartcarlib::pins::v2::rightOdometerPin, []() {rightOdometer.update();},pulsesPerMeter};
+
 SR04 left(arduinoRuntime, 2, 3, maxDistance);
 SR04 right(arduinoRuntime, 4, 5, maxDistance);
 SR04 front(arduinoRuntime, 6, 7, maxDistance);
 SR04 back(arduinoRuntime, 16, 17, maxDistance);
 
-
-std::vector<char> frameBuffer;
+SimpleCar car(control);
 
 void setup()
 {
@@ -100,13 +84,16 @@ Serial.println("Connecting to WiFi...");
     Serial.print(".");
     delay(1000);
   }
+
+  // -------MQTT Subscriptions-------
 mqtt.subscribe("/LittleDrivers/insiderange/#", 1);
 mqtt.subscribe("/LittleDrivers/control/#", 1);
 mqtt.subscribe("/LittleDrivers/obstacleAvoidance/toggle", 1);
 
+
 mqtt.onMessage([](String topic, String message) {
 
-
+//------- Controls the car through the joystick -------
     if (topic == "/LittleDrivers/control/throttle") {
       car.setSpeed(message.toInt());
     } else if (topic == "/LittleDrivers/control/steering") {
@@ -147,13 +134,16 @@ mqtt.onMessage([](String topic, String message) {
 void loop()
 {
 
+//------- Gets distance to obstacle -------
 const auto fdistance = front.getDistance();
 const auto bdistance = back.getDistance();
 const auto rdistance = right.getDistance();
 const auto ldistance = left.getDistance();
+
 String speed = "";
 String distance = "";
 
+//------- Camera -------
 if (mqtt.connected()) {
     mqtt.loop();
     const auto currentTime = millis();
@@ -174,40 +164,13 @@ if (mqtt.connected()) {
           }
         }
 
+//------- To show speed and total distance travelled on app -------
  speed = String(leftOdometer.getSpeed());
  mqtt.publish("/LittleDrivers/Odometer/speed",speed);
  distance = String (leftOdometer.getDistance()/100);
  mqtt.publish("/LittleDrivers/odometer/distance", distance);
 
-
-
-//THIS IS FOR THE ODOMETER
-
-/*Serial.print(String(leftOdometer.getDistance()/100) + " m");
-    Serial.print("\t\t");
-    Serial.println(String(rightOdometer.getDistance()/100) + " m");
-
-    Serial.println(String(leftOdometer.getSpeed()) + " m/s");
-    Serial.print("\t\t");
-    Serial.println(String(rightOdometer.getSpeed()) + " m/s");
-    Serial.println(odometer.getDistance());
-        delay(100);*/
-//THIS IS FOR THE ODOMETER
-
-
-//THIS IS TO PRINT THE ULTRASONIC SENSORS
-     /* static auto previousTransmission = 0UL;
-      const auto currentTime = millis();
-      // ================= 2
-      if (currentTime > previousTransmission + transmissionInterval) {
-        previousTransmission = currentTime;
-        Serial.println("===");
-        Serial.println("Left: " + String(left.getDistance()));
-        Serial.println("Right: " + String(right.getDistance()));
-        Serial.println("Front: " + String(front.getDistance()));
-        Serial.println("Back: " + String(back.getDistance()));}*/
-//THIS IS TO PRINT THE ULTRASONIC SENSORS
-
+//------- Obstacle avoidance -------
 if(toggleOn){
 
 if (fdistance > 0 && fdistance < 90 && insideRangeF==false) {
@@ -236,10 +199,6 @@ if (ldistance > 0 && ldistance < 60 && insideRangeL==false) {
 }
 
 handleInput();
-  
-
-
- 
 
 #ifdef __SMCE__
   // Avoid over-using the CPU if we are running in the emulator
@@ -247,9 +206,9 @@ handleInput();
 
 #endif
 
-
 }
 
+//------- Controls car through serial -------
 void handleInput()
 { // handle serial input if there is any
     if (Serial.available())
@@ -326,8 +285,6 @@ void handleInput()
                 insideRangeL=false;
                 }
             }
-
-
             break;
         default: // if you receive something that you don't know, just stop
             car.setSpeed(0);
