@@ -42,7 +42,6 @@ DirectionlessOdometer rightOdometer{ arduinoRuntime,
                                      []() { rightOdometer.update(); },
                                      pulsesPerMeter };
 // THIS IS FOR THE ODOMETER
-
 SimpleCar car(control);
 
 const auto oneSecond = 1000UL;
@@ -62,12 +61,13 @@ bool insideRangeF = false;
 bool insideRangeB = false;
 bool insideRangeR = false;
 bool insideRangeL = false;
-SR04 left(arduinoRuntime, 2, 3, maxDistance); // trigger and echo pin respectively
+bool toggleOn = false;
+
+SR04 left(arduinoRuntime, 2, 3, maxDistance);
 SR04 right(arduinoRuntime, 4, 5, maxDistance);
 SR04 front(arduinoRuntime, 6, 7, maxDistance);
 SR04 back(arduinoRuntime, 16, 17, maxDistance);
 
-auto currentSpeed = 0;
 
 std::vector<char> frameBuffer;
 
@@ -102,6 +102,7 @@ Serial.println("Connecting to WiFi...");
   }
 mqtt.subscribe("/LittleDrivers/insiderange/#", 1);
 mqtt.subscribe("/LittleDrivers/control/#", 1);
+mqtt.subscribe("/LittleDrivers/obstacleAvoidance/toggle", 1);
 
 mqtt.onMessage([](String topic, String message) {
 
@@ -129,6 +130,12 @@ mqtt.onMessage([](String topic, String message) {
             if(message.equals("false")){
                 delay(1000);
                 insideRangeR=false;
+                }
+    } else if(topic=="/LittleDrivers/obstacleAvoidance/toggle"){
+            if(message.equals("false")){
+                toggleOn=false;
+            } else if(message.equals("true")){
+                toggleOn=true;
                 }
     } else {
       Serial.println(topic + " " + message);
@@ -201,6 +208,7 @@ if (mqtt.connected()) {
         Serial.println("Back: " + String(back.getDistance()));}*/
 //THIS IS TO PRINT THE ULTRASONIC SENSORS
 
+if(toggleOn){
 
 if (fdistance > 0 && fdistance < 90 && insideRangeF==false) {
    car.setSpeed(0);
@@ -225,6 +233,7 @@ if (ldistance > 0 && ldistance < 60 && insideRangeL==false) {
     insideRangeL = true;
     mqtt.publish("/LittleDrivers/insiderange/left", "true");
     }
+}
 
 handleInput();
   
@@ -269,7 +278,6 @@ void handleInput()
             } else{
                 car.setSpeed(fSpeed);
                 car.setAngle(lDegrees);
-                currentSpeed=fSpeed;
                 if(insideRangeR==true || insideRangeB==true){
                 delay(1000);
                 insideRangeR=false;
@@ -284,7 +292,6 @@ void handleInput()
             } else {
                 car.setSpeed(fSpeed);
                 car.setAngle(rDegrees);
-                currentSpeed=fSpeed;
                 if(insideRangeL==true || insideRangeL==true){
                 delay(1000);
                 insideRangeL=false;
@@ -299,7 +306,6 @@ void handleInput()
             } else {
                 car.setSpeed(fSpeed);
                 car.setAngle(0);
-                currentSpeed=fSpeed;
                 if (insideRangeB==true) {
                 delay(1000);
                 insideRangeB=false;
@@ -313,7 +319,6 @@ void handleInput()
             } else {
                 car.setSpeed(bSpeed);
                 car.setAngle(0);
-                currentSpeed=bSpeed;
                 if (insideRangeF==true || insideRangeF==true || insideRangeF==true ){
                 delay(1000);
                 insideRangeF=false;
