@@ -179,10 +179,14 @@
         android:id="@+id/imageView4"
         android:layout_width="44dp"
         android:layout_height="26dp"
-        android:layout_marginStart="568dp"
+        android:layout_marginStart="560dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.922"
         app:srcCompat="@drawable/three_dots"
-        tools:layout_editor_absoluteY="369dp"
         tools:ignore="MissingConstraints" />
 
 
