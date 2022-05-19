@@ -18,15 +18,15 @@ jobs:
           cache: gradle
 
       - name: Build with Gradle
-        run: cd LittleDrivers && ./gradlew build
+        run: cd Android/LittleDrivers ./gradlew build
 
   run-instrumental-testing:
     runs-on: macos-latest
     steps:
       - name: Cloning
         uses: actions/checkout@v2
-      - name: Grant execute permission for gradlew
-        run: cd LittleDrivers && chmod +x gradlew
+      - name: makes gradlew allowed
+        run: cd Android/LittleDrivers chmod +x gradlew
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
@@ -40,5 +40,5 @@ jobs:
           profile: Nexus 6
           cores: 2
           force-avd-creation: true
-          working-directory: ./android/LittleDrivers
+          working-directory: ./Android/LittleDrivers
           script: ./gradlew connectedCheck
