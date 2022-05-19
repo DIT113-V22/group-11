@@ -15,17 +15,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LittleDrivers">
         <activity
-            android:name=".Theme4Activity"
+            android:name=".Loading4Activity"
             android:exported="false"
             android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Loading3Activity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Loading2Activity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Loading1Activity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Theme4Activity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Theme3Activity"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Theme2Activity"
             android:exported="false"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Theme1Activity"
             android:exported="false"

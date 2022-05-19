@@ -30,18 +30,11 @@ public class HomeActivity extends AppCompatActivity {
         theme3 = findViewById(R.id.Theme3);
         theme4 = findViewById(R.id.Theme4);
 
-        /*theme1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,Theme1Activity.class);
-                startActivity(intent);
-            }
-        });*/
 
         theme1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,Theme1Activity.class);
+                Intent intent = new Intent(HomeActivity.this,Loading1Activity.class);
                 startActivity(intent);
             }
         });
@@ -49,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         theme2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,Theme2Activity.class);
+                Intent intent = new Intent(HomeActivity.this,Loading2Activity.class);
                 startActivity(intent);
             }
         });
@@ -57,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
         theme3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,Theme3Activity.class);
+                Intent intent = new Intent(HomeActivity.this,Loading3Activity.class);
                 startActivity(intent);
             }
         });
@@ -65,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
         theme4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(HomeActivity.this,Theme4Activity.class);
+                Intent intent = new Intent(HomeActivity.this,Loading4Activity.class);
                 startActivity(intent);
             }
         });
