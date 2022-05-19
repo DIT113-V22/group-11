@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Theme1Activity">
+
+    <LinearLayout
+        android:id="@+id/MainLinerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="268dp"
+        tools:layout_editor_absoluteY="71dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/InfoLinearLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <TableLayout
+                android:id="@+id/tableLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="425dp"
+                android:layout_height="345dp"
+                android:layout_weight="0.3"
+                android:contentDescription="@string/cameraview"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.097"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.joystickjhr.JoystickJhr
+                android:id="@+id/joystick"
+                android:layout_width="218dp"
+                android:layout_height="212dp"
+                android:layout_gravity="center_horizontal"
+                app:alphaCircleFirst="260"
+                app:alphaCircleSecond="300"
+                app:colorFirst="#8B0018"
+                app:colorSecond="#8B0018"
+                app:colorText="#D5D8E7"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.949"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.834"
+                app:radioCircle="0.4"
+                app:relleno="true"
+                app:textJoy=""
+                app:textSizeJoy="70"
+                app:xtextOffset="-55"
+                app:ytextOffset="-15"
+                tools:ignore="MissingClass">
+
+            </com.example.joystickjhr.JoystickJhr>
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="69dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="69dp"
+                android:layout_marginBottom="160dp"
+                android:src="@drawable/arrow2"
+                app:layout_constraintBottom_toBottomOf="@+id/joystick"
+                app:layout_constraintEnd_toEndOf="@+id/joystick"
+                app:layout_constraintStart_toStartOf="@+id/joystick"
+                app:layout_constraintTop_toTopOf="@+id/joystick" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="69dp"
+                android:layout_marginTop="170dp"
+                android:layout_marginEnd="69dp"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/joystick"
+                app:layout_constraintEnd_toEndOf="@+id/joystick"
+                app:layout_constraintStart_toStartOf="@+id/joystick"
+                app:layout_constraintTop_toTopOf="@+id/joystick" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="69dp"
+                android:layout_marginEnd="170dp"
+                android:layout_marginBottom="69dp"
+                android:src="@drawable/arrow3"
+                app:layout_constraintBottom_toBottomOf="@+id/joystick"
+                app:layout_constraintEnd_toEndOf="@+id/joystick"
+                app:layout_constraintStart_toStartOf="@+id/joystick"
+                app:layout_constraintTop_toTopOf="@+id/joystick" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="69dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="69dp"
+                android:src="@drawable/arrow1"
+                app:layout_constraintBottom_toBottomOf="@+id/joystick"
+                app:layout_constraintEnd_toEndOf="@+id/joystick"
+                app:layout_constraintStart_toStartOf="@+id/joystick"
+                app:layout_constraintTop_toTopOf="@+id/joystick" />
+
+            <TextView
+                android:id="@+id/WarningMessage"
+                android:layout_width="224dp"
+                android:layout_height="56dp"
+                android:background="#770000"
+                android:fontFamily="monospace"
+                android:text="@string/alert_obstacle_nearby"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.948"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.278" />
+
+            <Switch
+                android:id="@+id/safeDrive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/safe_drive"
+                android:textStyle="italic"
+                android:thumbTint="#770000"
+                android:trackTint="#9A4242"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/speedView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Speed"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.894"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.186" />
+
+            <TextView
+                android:id="@+id/distanceView"
+                android:layout_width="105dp"
+                android:layout_height="23dp"
+                android:text="@string/distance"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.916"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.11" />
+
+            <TextView
+                android:id="@+id/Distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="@string/distancetext"
+                android:textStyle="italic"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.743"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.109" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="Current Speed:"
+                android:textStyle="italic"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.794"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.186" />
+
+            <ImageButton
+                android:id="@+id/home1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/black_home"
+                android:background="@color/cardview_shadow_end_color"/>
+            <![CDATA[
+
+            app:layout_constraintVertical_bias="0.015" />
+
+        ]]>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
