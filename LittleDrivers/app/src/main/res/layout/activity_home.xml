@@ -84,10 +84,10 @@
 
             <ImageButton
                 android:id="@+id/Theme2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="234dp"
+                android:layout_height="wrap_content"
                 android:background="@color/cardview_shadow_end_color"
-                app:srcCompat="@drawable/icons8_home_100" />
+                app:srcCompat="@drawable/nemo_friends" />
 
         </androidx.cardview.widget.CardView>
 
@@ -159,6 +159,7 @@
         android:layout_height="wrap_content"
         android:text="@string/please_select_one_of_the_themes_to_play_in"
         android:textColor="#FBFBFB"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
