@@ -164,25 +164,25 @@
                 app:layout_constraintHorizontal_bias="0.894"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.112" />
+                app:layout_constraintVertical_bias="0.178" />
 
             <TextView
                 android:id="@+id/distanceView"
-                android:layout_width="147dp"
-                android:layout_height="22dp"
+                android:layout_width="71dp"
+                android:layout_height="25dp"
                 android:text="@string/distance"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.972"
+                app:layout_constraintHorizontal_bias="0.869"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.041" />
+                app:layout_constraintVertical_bias="0.098" />
 
             <TextView
                 android:id="@+id/Distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="168dp"
+                android:layout_marginEnd="164dp"
                 android:fontFamily="monospace"
                 android:text="@string/distancetext"
                 android:textStyle="italic"
@@ -190,7 +190,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.04" />
+                app:layout_constraintVertical_bias="0.096" />
 
             <TextView
                 android:id="@+id/textView"
@@ -205,7 +205,20 @@
                 app:layout_constraintHorizontal_bias="0.794"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.112" />
+                app:layout_constraintVertical_bias="0.178" />
+
+            <ImageButton
+                android:id="@+id/home3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/cardview_shadow_end_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/black_home" />
             app:layout_constraintVertical_bias="0.015" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

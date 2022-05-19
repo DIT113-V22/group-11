@@ -30,6 +30,14 @@ public class HomeActivity extends AppCompatActivity {
         theme3 = findViewById(R.id.Theme3);
         theme4 = findViewById(R.id.Theme4);
 
+        /*theme1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this,Theme1Activity.class);
+                startActivity(intent);
+            }
+        });*/
+
         theme1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

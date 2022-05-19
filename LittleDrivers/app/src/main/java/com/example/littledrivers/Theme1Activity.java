@@ -2,6 +2,7 @@ package com.example.littledrivers;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -49,21 +51,33 @@ public class Theme1Activity extends AppCompatActivity {
     private boolean isConnected = false;
     private ImageView mCameraView;
 
-    private TextView angleTextView;
-    private TextView powerTextView;
-    private TextView directionTextView;
+    //private TextView angleTextView;
+    //private TextView powerTextView;
+    //private TextView directionTextView;
     private TextView warningMessage;
     private Switch safeDrive;
     private TextView speedTextView;
     private TextView distanceTextView;
 
+   ImageButton button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_theme1);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
+        setContentView(R.layout.activity_theme1);
+
+       button = findViewById(R.id.home1);
+
+       button.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+              Intent intent = new Intent(Theme1Activity.this, HomeActivity.class);
+                startActivity(intent);
+           }
+        });
 
         mMqttClient = new MqttClient(getApplicationContext(), MQTT_SERVER, TAG);
         mCameraView = findViewById(R.id.imageView);
