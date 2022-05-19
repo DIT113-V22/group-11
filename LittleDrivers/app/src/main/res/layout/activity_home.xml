@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/cardview_shadow_end_color"
-                app:srcCompat="@drawable/icons8_home_100"
+                app:srcCompat="@drawable/princess"
                 android:contentDescription="This button will take you to the first theme screen" />
 
         </androidx.cardview.widget.CardView>
