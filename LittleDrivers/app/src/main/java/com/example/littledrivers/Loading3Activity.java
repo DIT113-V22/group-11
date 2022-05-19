@@ -33,7 +33,7 @@ public class Loading3Activity extends AppCompatActivity {
         progressAnimation();
 
         Drawable progressDrawable = progressBar.getProgressDrawable().mutate();
-        progressDrawable.setColorFilter(Color.LTGRAY, android.graphics.PorterDuff.Mode.SRC_IN);
+        progressDrawable.setColorFilter(Color.BLACK, android.graphics.PorterDuff.Mode.SRC_IN);
         progressBar.setProgressDrawable(progressDrawable);
     }
 
