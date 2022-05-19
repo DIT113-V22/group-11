@@ -144,10 +144,10 @@
 
             <ImageButton
                 android:id="@+id/Theme4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="163dp"
+                android:layout_height="158dp"
                 android:background="@color/cardview_shadow_end_color"
-                app:srcCompat="@drawable/icons8_home_100" />
+                app:srcCompat="@drawable/cars" />
 
         </androidx.cardview.widget.CardView>
 
