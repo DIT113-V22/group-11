@@ -20,3 +20,6 @@ jobs:
       run: cd LittleDrivers && chmod +x gradlew
     - name: Build with Gradle
       run: cd LittleDrivers && ./gradlew build
+      
+    - name: Android Emulator
+      uses: vgaidarji/android-github-actions-emulator@v1.0.1
