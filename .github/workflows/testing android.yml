@@ -1,3 +1,4 @@
+
 name: Android CI
 
 on: [push, pull_request]
@@ -8,18 +9,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: gradle
+      - uses: actions/checkout@v3
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
 
-    - name: Grant execute permission for gradlew
-      run: cd LittleDrivers && chmod +x gradlew
-    - name: Build with Gradle
-      run: cd LittleDrivers && ./gradlew build
-      
-    - name: Android Emulator
-      uses: vgaidarji/android-github-actions-emulator@v1.0.1
+      - name: Build with Gradle
+        run: cd LittleDrivers && ./gradlew build
+
+  run-instrumental-testing:
+    runs-on: macos-latest
+    steps:
+      - name: Cloning
+        uses: actions/checkout@v2
+      - name: Grant execute permission for gradlew
+        run: cd LittleDrivers && chmod +x gradlew
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+      - name: AndroidEmulator-Runner for-LittleDrivers-app
+        uses: ReactiveCircus/android-emulator-runner@v2.24.0
+        with:
+          api-level: 29
+          arch: x86_64
+          profile: Nexus 6
+          cores: 2
+          force-avd-creation: true
+          working-directory: ./android/LittleDrivers
+          script: ./gradlew connectedCheck
