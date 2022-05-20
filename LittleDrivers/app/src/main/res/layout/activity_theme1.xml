@@ -13,7 +13,8 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="268dp"
-        tools:layout_editor_absoluteY="71dp">
+        tools:layout_editor_absoluteY="71dp"
+        android:background="@color/babypink">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/InfoLinearLayout"
@@ -45,8 +46,8 @@
                 android:layout_gravity="center_horizontal"
                 app:alphaCircleFirst="260"
                 app:alphaCircleSecond="300"
-                app:colorFirst="#8B0018"
-                app:colorSecond="#8B0018"
+                app:colorFirst="@color/purple"
+                app:colorSecond="@color/purple"
                 app:colorText="#D5D8E7"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
