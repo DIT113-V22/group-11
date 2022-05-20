@@ -147,7 +147,7 @@
                 android:text="@string/safe_drive"
                 android:textStyle="italic"
                 android:thumbTint="@color/purple"
-                android:trackTint="#@color/purple"
+                android:trackTint="@color/purple"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
