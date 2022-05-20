@@ -140,9 +140,10 @@ const auto bdistance = back.getDistance();
 const auto rdistance = right.getDistance();
 const auto ldistance = left.getDistance();
 
-String speed = "";
+int speedLeft = 0;
+int speedRight = 0;
 String distance = "";
-
+String speed = "";
 //------- Camera -------
 if (mqtt.connected()) {
     mqtt.loop();
@@ -165,7 +166,9 @@ if (mqtt.connected()) {
         }
 
 //------- To show speed and total distance travelled on app -------
- speed = String(leftOdometer.getSpeed());
+ speedLeft = leftOdometer.getSpeed();
+ speedRight = rightOdometer.getSpeed();
+ speed = String((speedLeft + speedRight));
  mqtt.publish("/LittleDrivers/Odometer/speed",speed);
  distance = String (leftOdometer.getDistance()/100);
  mqtt.publish("/LittleDrivers/odometer/distance", distance);
