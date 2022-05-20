@@ -18,7 +18,7 @@ jobs:
           cache: gradle
 
       - name: Build with Gradle
-        run: cd Android/LittleDrivers ./gradlew build
+        run: cd LittleDrivers ./gradlew build
 
   run-instrumental-testing:
     runs-on: macos-latest
@@ -26,7 +26,7 @@ jobs:
       - name: Cloning
         uses: actions/checkout@v2
       - name: makes gradlew allowed
-        run: cd Android/LittleDrivers chmod +x gradlew
+        run: cd LittleDrivers chmod +x gradlew
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
