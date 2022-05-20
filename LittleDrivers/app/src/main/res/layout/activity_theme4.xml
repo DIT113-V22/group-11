@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/cars_racing"
     tools:context=".Theme4Activity">
 
     <LinearLayout
@@ -43,11 +44,12 @@
                 android:layout_width="218dp"
                 android:layout_height="212dp"
                 android:layout_gravity="center_horizontal"
+                android:visibility="visible"
                 app:alphaCircleFirst="260"
                 app:alphaCircleSecond="300"
                 app:colorFirst="#8B0018"
-                app:colorSecond="#8B0018"
-                app:colorText="#D5D8E7"
+                app:colorSecond="#FAF6F6"
+                app:colorText="#203AC1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.949"
@@ -60,7 +62,8 @@
                 app:textSizeJoy="70"
                 app:xtextOffset="-55"
                 app:ytextOffset="-15"
-                tools:ignore="MissingClass">
+                tools:ignore="MissingClass"
+                tools:visibility="visible">
 
             </com.example.joystickjhr.JoystickJhr>
 
@@ -144,12 +147,13 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:text="@string/safe_drive"
-                android:textStyle="italic"
-                android:thumbTint="#770000"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold"
+                android:thumbTint="#8B0018"
                 android:trackTint="#9A4242"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.05"
+                app:layout_constraintHorizontal_bias="0.011"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
@@ -159,9 +163,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Speed"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.882"
+                app:layout_constraintHorizontal_bias="0.83"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.183" />
@@ -171,9 +177,11 @@
                 android:layout_width="82dp"
                 android:layout_height="26dp"
                 android:text="@string/distance"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.875"
+                app:layout_constraintHorizontal_bias="0.862"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.119" />
@@ -184,11 +192,12 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:text="@string/distancetext"
-                android:textStyle="italic"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.732"
+                app:layout_constraintHorizontal_bias="0.721"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.117" />
@@ -199,11 +208,12 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:text="Current Speed:"
-                android:textStyle="italic"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.784"
+                app:layout_constraintHorizontal_bias="0.77"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.183" />
@@ -212,15 +222,15 @@
                 android:id="@+id/home4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@color/cardview_shadow_end_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.976"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/black_home"
-                android:background="@color/cardview_shadow_end_color"/>
-            app:layout_constraintVertical_bias="0.015" />
+                app:layout_constraintVertical_bias="0.019"
+                app:srcCompat="@drawable/red_home" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
