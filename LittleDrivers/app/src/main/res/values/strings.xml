@@ -26,4 +26,5 @@
     <string name="off">off</string>
     <string name="on">on</string>
     <string name="please_select_one_of_the_themes_to_play_in">Please select one of the themes to play in:</string>
+    <string name="warningmessagePrincess">Be wary Princess! There is an obstacle up ahead :o</string>
 </resources>
