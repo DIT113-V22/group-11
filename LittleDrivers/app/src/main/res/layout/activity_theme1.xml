@@ -146,6 +146,7 @@
                 android:fontFamily="monospace"
                 android:text="@string/safe_drive"
                 android:textStyle="italic"
+                android:textColor="#000"
                 android:thumbTint="@color/darkpink"
                 android:trackTint="@color/darkpink"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -161,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:text="speed"
                 android:textStyle="italic"
+                android:textColor="#000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.919"
@@ -174,6 +176,7 @@
                 android:layout_height="23dp"
                 android:text="@string/distance"
                 android:textStyle="italic"
+                android:textColor="#000"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.916"
@@ -188,6 +191,7 @@
                 android:fontFamily="monospace"
                 android:text="@string/distancetext"
                 android:textStyle="bold"
+                android:textColor="#000"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -203,6 +207,7 @@
                 android:fontFamily="monospace"
                 android:text="Current Speed:"
                 android:textStyle="bold"
+                android:textColor="#000"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -222,7 +227,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/black_home" />
+                app:srcCompat="@drawable/darkpink_home" />
             <![CDATA[
 
             app:layout_constraintVertical_bias="0.015" />
