@@ -10,4 +10,7 @@
     <color name="baby_blue"> #89cff0</color>
     <color name="dark_blue"> #00008D</color>
     <color name="dark_bbyBlue"> #007DDD</color>
+    <color name="white">#FFFFFF</color>
+    <color name="babypink">#F5D8E3</color>
+    <color name="darkpink">#D5789D</color>
 </resources>
