@@ -14,10 +14,10 @@
     <string name="left_lab">Left</string>
     <string name="left_front_lab">Front-Left</string>
     <string name="center_lab">Center</string>
-    <string name="rights_lab">http://zerokol.com</string>
+    <string name="rights_lab">http://zerokol.com/</string>
     <string name="textview">TextView</string>
     <string name="distance">distance</string>
-    <string name="distancetext">Distance:</string>
+    <string name="distancetext">Total Distance:</string>
     <string name="Hello">Hello</string>
     <string name="speed">speed</string>
     <string name="alert_obstacle_nearby">ALERT! OBSTACLE NEARBY!</string>
@@ -26,4 +26,5 @@
     <string name="off">off</string>
     <string name="on">on</string>
     <string name="please_select_one_of_the_themes_to_play_in">Please select one of the themes to play in:</string>
+    <string name="warningmessagePrincess">Be wary Princess! There is an obstacle up ahead :o</string>
 </resources>
