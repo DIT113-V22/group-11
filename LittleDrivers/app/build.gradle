@@ -31,9 +31,11 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 }
-gradle.projectsEvaluated {
-    connectedDebugAndroidTest.finalizedBy AndroidShowTestResults
+task connectedTest(dependsOn: ["connectedDebugAndroidTest"]){
+
 }
+connectedTest.finalizedBy "AndroidShowTestResults"
+
 
 repositories {
     maven {
