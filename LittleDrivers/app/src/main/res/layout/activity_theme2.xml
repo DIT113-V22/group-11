@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/Theme2Activity"
     tools:context=".Theme2Activity">
 
     <LinearLayout
