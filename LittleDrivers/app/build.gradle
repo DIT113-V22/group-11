@@ -31,6 +31,9 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
 }
+gradle.projectsEvaluated {
+    connectedDebugAndroidTest.finalizedBy AndroidShowTestResults
+}
 
 repositories {
     maven {
