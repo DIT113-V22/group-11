@@ -39,7 +39,5 @@ jobs:
           api-level: 29
           arch: x86_64
           profile: Nexus 6
-          cores: 2
-          force-avd-creation: true
           working-directory: ./LittleDrivers
           script: ./gradlew connectedCheck
