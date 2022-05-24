@@ -16,7 +16,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4ClassRunner::class)
-class MainActivityTest {
+class NavigationTest {
     @Test
     fun homePage_to_theme1() {
         val activityScenario = ActivityScenario.launch(HomeActivity::class.java)
