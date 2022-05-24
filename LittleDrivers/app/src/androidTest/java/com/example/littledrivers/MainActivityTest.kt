@@ -5,6 +5,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.scrollTo
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
@@ -17,28 +18,30 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4ClassRunner::class)
 class MainActivityTest {
     @Test
-    fun test_navHomePage_theme1() {
+    fun homePage_to_theme1() {
         val activityScenario = ActivityScenario.launch(HomeActivity::class.java)
 
         onView(withId(R.id.Theme1)).perform(click())
         onView(withId(R.id.Theme1Activity)).check(matches(isDisplayed()))
+
     }
 
-    @Test
+   @Test
     fun theme1_back_to_HomePage() {
         val activityScenario = ActivityScenario.launch(Theme1Activity::class.java)
 
         onView(withId(R.id.home1)).perform(click())
         onView(withId(R.id.homeActivity)).check((matches(isDisplayed())))
+
     }
 
-   /* @Test
-    fun test_navHomePage_theme2() {
+   @Test
+    fun homePage_to_theme2() {
         val activityScenario = ActivityScenario.launch(HomeActivity::class.java)
 
         onView(withId(R.id.Theme2)).perform(click())
         onView(withId(R.id.Theme2Activity)).check(matches(isDisplayed()))
-    }*/
+    }
 
     @Test
     fun theme2_back_to_HomePage() {
@@ -48,13 +51,13 @@ class MainActivityTest {
         onView(withId(R.id.homeActivity)).check((matches(isDisplayed())))
     }
 
-   /* @Test
-    fun test_navHomePage_theme3() {
+    @Test
+    fun homePage_to_theme3() {
         val activityScenario = ActivityScenario.launch(HomeActivity::class.java)
 
         onView(withId(R.id.Theme3)).perform(click())
         onView(withId(R.id.Theme3Activity)).check(matches(isDisplayed()))
-    }*/
+    }
 
     @Test
     fun theme3_back_to_HomePage() {
@@ -64,13 +67,13 @@ class MainActivityTest {
         onView(withId(R.id.homeActivity)).check((matches(isDisplayed())))
     }
 
-   /* @Test
-    fun test_navHomePage_theme4() {
+   @Test
+    fun homePage_to_theme4() {
         val activityScenario = ActivityScenario.launch(HomeActivity::class.java)
 
         onView(withId(R.id.Theme4)).perform(click())
         onView(withId(R.id.Theme4Activity)).check(matches(isDisplayed()))
-    }*/
+    }
 
     @Test
     fun theme4_back_to_HomePage() {
