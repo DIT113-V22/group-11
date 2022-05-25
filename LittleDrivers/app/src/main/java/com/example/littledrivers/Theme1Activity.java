@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,15 +52,16 @@ public class Theme1Activity extends AppCompatActivity {
     private boolean isConnected = false;
     private ImageView mCameraView;
 
-    //private TextView angleTextView;
-    //private TextView powerTextView;
-    //private TextView directionTextView;
+    private TextView angleTextView;
+    private TextView powerTextView;
+    private TextView directionTextView;
     private TextView warningMessage;
     private Switch safeDrive;
     private TextView speedTextView;
     private TextView distanceTextView;
 
-   ImageButton button;
+    ImageButton button;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,15 +71,17 @@ public class Theme1Activity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_theme1);
 
-       button = findViewById(R.id.home1);
+        button = findViewById(R.id.home1);
 
-       button.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-              Intent intent = new Intent(Theme1Activity.this, HomeActivity.class);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Theme1Activity.this, HomeActivity.class);
                 startActivity(intent);
-           }
+            }
         });
+
+
 
         mMqttClient = new MqttClient(getApplicationContext(), MQTT_SERVER, TAG);
         mCameraView = findViewById(R.id.imageView);
@@ -86,14 +90,13 @@ public class Theme1Activity extends AppCompatActivity {
         speedTextView = findViewById(R.id.speedView);
         distanceTextView = findViewById(R.id.distanceView);
         safeDrive = (Switch) findViewById(R.id.safeDrive);
+        mediaPlayer = MediaPlayer.create(this, R.raw.beep);
         connectToMqttBroker();
 
         final JoystickJhr joystick = findViewById(R.id.joystick);
 
         safeDrive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // do something, the isChecked will be
-                // true if the switch is in the On position
                 if (safeDrive.isChecked()) {
                     mMqttClient.publish("/LittleDrivers/obstacleAvoidance/toggle", "true", QOS, null);
                 } else if (!safeDrive.isChecked()) {
@@ -102,11 +105,17 @@ public class Theme1Activity extends AppCompatActivity {
             }
         });
 
+
+
+
+
         joystick.setOnTouchListener((view, motionEvent) -> {
                     if(insideRangeR || insideRangeB || insideRangeL || insideRangeF){
                         warningMessage.setVisibility(View.VISIBLE);
+                        mediaPlayer.setLooping(true);
                     } else {
                         warningMessage.setVisibility(View.INVISIBLE);
+                        mediaPlayer.setLooping(false);
                     }
                     joystick.move(motionEvent);
                     joystick.joyX();
@@ -384,5 +393,6 @@ public class Theme1Activity extends AppCompatActivity {
         mMqttClient.publish(THROTTLE_CONTROL, Integer.toString(throttleSpeed), QOS, null);
         mMqttClient.publish(STEERING_CONTROL, Integer.toString(steeringAngle), QOS, null);
     }
+
 
 }

@@ -118,6 +118,7 @@ public class Theme3Activity extends AppCompatActivity {
                         mediaPlayer.setLooping(true);
                     } else {
                         warningMessage.setVisibility(View.INVISIBLE);
+                        mediaPlayer.setLooping(false);
                     }
                     joystick.move(motionEvent);
                     joystick.joyX();
