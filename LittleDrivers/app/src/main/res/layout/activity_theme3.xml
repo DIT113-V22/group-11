@@ -223,7 +223,32 @@
                 app:layout_constraintBottom_toBottomOf="@+id/joystick"
                 app:layout_constraintEnd_toEndOf="@+id/joystick"
                 app:layout_constraintStart_toStartOf="@+id/joystick"
-                app:srcCompat="@drawable/arrow_down_black" /><![CDATA[
+                app:srcCompat="@drawable/arrow_down_black" />
+            <ImageButton
+                android:id="@+id/speedUp"
+                android:layout_width="59dp"
+                android:layout_height="57dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.776"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.279"
+                app:srcCompat="@drawable/arrow_up_darkpink" />
+
+            <ImageButton
+                android:id="@+id/speedDown"
+                android:layout_width="61dp"
+                android:layout_height="56dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.916"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.278"
+                app:srcCompat="@drawable/arrow_down_darkpink" />
+
+            <![CDATA[
 
 
 
