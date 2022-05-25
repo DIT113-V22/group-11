@@ -15,10 +15,10 @@ WiFiClient net;
 const char ssid[] = "***";
 const char pass[] = "****";
 
-const int fSpeed   = 50;  // 50% of the full speed forward
-const int bSpeed   = -50; // 50% of the full speed backward
-const int lDegrees = -50; // degrees to turn left
-const int rDegrees = 50;  // degrees to turn right
+int fSpeed   = 50;  // 50% of the full speed forward
+int bSpeed   = -50; // 50% of the full speed backward
+int lDegrees = -50; // degrees to turn left
+int rDegrees = 50;  // degrees to turn right
 const unsigned long transmissionInterval = 100; // In milliseconds
 const auto pulsesPerMeter = 600;
 
@@ -37,6 +37,7 @@ bool insideRangeB = false;
 bool insideRangeR = false;
 bool insideRangeL = false;
 bool toggleOn = false;
+int speed = 0;
 
 std::vector<char> frameBuffer;
 
@@ -59,6 +60,7 @@ void setup()
 {
 // Move the car with 50% of its full speed
      car.setSpeed(0);
+     speed = 0;
 
        Serial.begin(9600);
 
@@ -89,6 +91,7 @@ Serial.println("Connecting to WiFi...");
 mqtt.subscribe("/LittleDrivers/insiderange/#", 1);
 mqtt.subscribe("/LittleDrivers/control/#", 1);
 mqtt.subscribe("/LittleDrivers/obstacleAvoidance/toggle", 1);
+mqtt.subscribe("/LittleDrivers/speed/#");
 
 
 mqtt.onMessage([](String topic, String message) {
@@ -96,6 +99,7 @@ mqtt.onMessage([](String topic, String message) {
 //------- Controls the car through the joystick -------
     if (topic == "/LittleDrivers/control/throttle") {
       car.setSpeed(message.toInt());
+      speed = message.toInt();
     } else if (topic == "/LittleDrivers/control/steering") {
       car.setAngle(message.toInt());
     } else if(topic=="/LittleDrivers/insiderange/front"){
@@ -124,7 +128,13 @@ mqtt.onMessage([](String topic, String message) {
             } else if(message.equals("true")){
                 toggleOn=true;
                 }
-    } else {
+    } else if(topic=="/LittleDrivers/speed/speedUp") {
+
+        Serial.println("+10");
+    } else if(topic=="/LittleDrivers/speed/speedDown") {
+
+          Serial.println("-10");
+    }else {
       Serial.println(topic + " " + message);
     }
   });
