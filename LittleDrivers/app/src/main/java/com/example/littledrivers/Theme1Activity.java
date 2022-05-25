@@ -112,6 +112,7 @@ public class Theme1Activity extends AppCompatActivity {
         joystick.setOnTouchListener((view, motionEvent) -> {
                     if(insideRangeR || insideRangeB || insideRangeL || insideRangeF){
                         warningMessage.setVisibility(View.VISIBLE);
+                        mediaPlayer.start();
                         mediaPlayer.setLooping(true);
                     } else {
                         warningMessage.setVisibility(View.INVISIBLE);
