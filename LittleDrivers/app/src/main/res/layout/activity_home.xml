@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
+    android:id="@+id/homeActivity"
     tools:context=".HomeActivity">
 
 
@@ -84,8 +85,8 @@
 
             <ImageButton
                 android:id="@+id/Theme2"
-                android:layout_width="234dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/cardview_shadow_end_color"
                 app:srcCompat="@drawable/nemo_friends" />
 
@@ -115,8 +116,8 @@
 
             <ImageButton
                 android:id="@+id/Theme3"
-                android:layout_width="170dp"
-                android:layout_height="369dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/cardview_shadow_end_color"
                 app:srcCompat="@drawable/_017513_bh6hirobaymax_1200" />
 
@@ -144,8 +145,8 @@
 
             <ImageButton
                 android:id="@+id/Theme4"
-                android:layout_width="163dp"
-                android:layout_height="158dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@color/cardview_shadow_end_color"
                 app:srcCompat="@drawable/cars" />
 

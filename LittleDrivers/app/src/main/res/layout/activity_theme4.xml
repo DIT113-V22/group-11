@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/cars_racing"
+    android:id="@+id/Theme4Activity"
     tools:context=".Theme4Activity">
 
     <LinearLayout
