@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -60,6 +61,7 @@ public class Theme4Activity extends AppCompatActivity {
     private TextView distanceTextView;
 
     ImageButton button;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,8 @@ public class Theme4Activity extends AppCompatActivity {
             }
         });
 
+
+
         mMqttClient = new MqttClient(getApplicationContext(), MQTT_SERVER, TAG);
         mCameraView = findViewById(R.id.imageView);
         warningMessage = findViewById(R.id.WarningMessage);
@@ -86,6 +90,7 @@ public class Theme4Activity extends AppCompatActivity {
         speedTextView = findViewById(R.id.speedView);
         distanceTextView = findViewById(R.id.distanceView);
         safeDrive = (Switch) findViewById(R.id.safeDrive);
+        mediaPlayer = MediaPlayer.create(this, R.raw.beep);
         connectToMqttBroker();
 
         final JoystickJhr joystick = findViewById(R.id.joystick);
@@ -109,8 +114,11 @@ public class Theme4Activity extends AppCompatActivity {
         joystick.setOnTouchListener((view, motionEvent) -> {
                     if(insideRangeR || insideRangeB || insideRangeL || insideRangeF){
                         warningMessage.setVisibility(View.VISIBLE);
+                        mediaPlayer.start();
+                        mediaPlayer.setLooping(true);
                     } else {
                         warningMessage.setVisibility(View.INVISIBLE);
+                        mediaPlayer.setLooping(false);
                     }
                     joystick.move(motionEvent);
                     joystick.joyX();
@@ -388,5 +396,6 @@ public class Theme4Activity extends AppCompatActivity {
         mMqttClient.publish(THROTTLE_CONTROL, Integer.toString(throttleSpeed), QOS, null);
         mMqttClient.publish(STEERING_CONTROL, Integer.toString(steeringAngle), QOS, null);
     }
+
 
 }
