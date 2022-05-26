@@ -54,12 +54,14 @@ SR04 right(arduinoRuntime, 4, 5, maxDistance);
 SR04 front(arduinoRuntime, 6, 7, maxDistance);
 SR04 back(arduinoRuntime, 16, 17, maxDistance);
 
-SimpleCar car(control);
+GY50 gyroscope(arduinoRuntime, 0, 100UL);
+
+SmartCar smartCar(arduinoRuntime, control, gyroscope,leftOdometer, rightOdometer);
 
 void setup()
 {
 // Move the car with 50% of its full speed
-     car.setSpeed(0);
+     smartCar.setSpeed(0);
      speed = 0;
 
        Serial.begin(9600);
@@ -98,10 +100,10 @@ mqtt.onMessage([](String topic, String message) {
 
 //------- Controls the car through the joystick -------
     if (topic == "/LittleDrivers/control/throttle") {
-      car.setSpeed(message.toInt());
+      smartCar.setSpeed(message.toInt());
       speed = message.toInt();
     } else if (topic == "/LittleDrivers/control/steering") {
-      car.setAngle(message.toInt());
+      smartCar.setAngle(message.toInt());
     } else if(topic=="/LittleDrivers/insiderange/front"){
            if(message.equals("false")){
                 delay(1000);
@@ -129,10 +131,8 @@ mqtt.onMessage([](String topic, String message) {
                 toggleOn=true;
                 }
     } else if(topic=="/LittleDrivers/speed/speedUp") {
-
-        Serial.println("+10");
+            Serial.println("+10");
     } else if(topic=="/LittleDrivers/speed/speedDown") {
-
           Serial.println("-10");
     }else {
       Serial.println(topic + " " + message);
@@ -150,8 +150,6 @@ const auto bdistance = back.getDistance();
 const auto rdistance = right.getDistance();
 const auto ldistance = left.getDistance();
 
-int speedLeft = 0;
-int speedRight = 0;
 String distance = "";
 String speed = "";
 //------- Camera -------
@@ -176,36 +174,34 @@ if (mqtt.connected()) {
         }
 
 //------- To show speed and total distance travelled on app -------
- speedLeft = leftOdometer.getSpeed();
- speedRight = rightOdometer.getSpeed();
- speed = String((speedLeft + speedRight));
+ speed = String(smartCar.getSpeed());
  mqtt.publish("/LittleDrivers/Odometer/speed",speed);
- distance = String (leftOdometer.getDistance()/100);
+ distance = String (smartCar.getDistance()/100);
  mqtt.publish("/LittleDrivers/odometer/distance", distance);
 
 //------- Obstacle avoidance -------
 if(toggleOn){
 
 if (fdistance > 0 && fdistance < 90 && insideRangeF==false) {
-   car.setSpeed(0);
+   smartCar.setSpeed(0);
    insideRangeF = true;
    mqtt.publish("/LittleDrivers/insiderange/front", "true");
    }
 
 if (bdistance > 0 && bdistance < 90 && insideRangeB==false) {
-   car.setSpeed(0);
+   smartCar.setSpeed(0);
    insideRangeB = true;
    mqtt.publish("/LittleDrivers/insiderange/back", "true");
    }
 
 if (rdistance > 0 && rdistance < 60 && insideRangeR==false) {
-    car.setSpeed(0);
+    smartCar.setSpeed(0);
     insideRangeR = true;
     mqtt.publish("/LittleDrivers/insiderange/right", "true");
     }
 
 if (ldistance > 0 && ldistance < 60 && insideRangeL==false) {
-    car.setSpeed(0);
+    smartCar.setSpeed(0);
     insideRangeL = true;
     mqtt.publish("/LittleDrivers/insiderange/left", "true");
     }
@@ -232,24 +228,24 @@ void handleInput()
         switch (input)
         {
          case 'u': // change speed to 30
-                    car.setSpeed(30);
+                  smartCar.setSpeed(30);
                   Serial.println("The speed of the car has been set to 30!");
                 break;
                 case 'i': // change speed to 50
-                  car.setSpeed(50);
+                  smartCar.setSpeed(50);
                   Serial.println("The speed of the car has been set to 50!");
                 break;
                 case 'o': // change speed to 70
-                  car.setSpeed(70);
+                  smartCar.setSpeed(70);
                   Serial.println("The speed of the car has been set to 70!");
                 break;
         case 'a': // rotate counter-clockwise going forward
         if(insideRangeL==true || insideRangeF==true){
-                car.setSpeed(0);
+                smartCar.setSpeed(0);
                 Serial.println("Too close to obstacle!");
             } else{
-                car.setSpeed(fSpeed);
-                car.setAngle(lDegrees);
+                smartCar.setSpeed(fSpeed);
+                smartCar.setAngle(lDegrees);
                 if(insideRangeR==true || insideRangeB==true){
                 delay(1000);
                 insideRangeR=false;
@@ -259,11 +255,11 @@ void handleInput()
             break;
         case 'd': // turn clock-wise
         if(insideRangeR==true || insideRangeF==true){
-                car.setSpeed(0);
+                smartCar.setSpeed(0);
                 Serial.println("Too close to obstacle!");
             } else {
-                car.setSpeed(fSpeed);
-                car.setAngle(rDegrees);
+                smartCar.setSpeed(fSpeed);
+                smartCar.setAngle(rDegrees);
                 if(insideRangeL==true || insideRangeL==true){
                 delay(1000);
                 insideRangeL=false;
@@ -273,11 +269,11 @@ void handleInput()
             break;
         case 'w': // go ahead
         if(insideRangeF==true || insideRangeR==true || insideRangeL==true){
-                car.setSpeed(0);
+                smartCar.setSpeed(0);
                 Serial.println("Too close to obstacle, you need to reverse!");
             } else {
-                car.setSpeed(fSpeed);
-                car.setAngle(0);
+                smartCar.setSpeed(fSpeed);
+                smartCar.setAngle(0);
                 if (insideRangeB==true) {
                 delay(1000);
                 insideRangeB=false;
@@ -286,11 +282,11 @@ void handleInput()
             break;
         case 's': // go back
         if(insideRangeB==true){
-                car.setSpeed(0);
+                smartCar.setSpeed(0);
                 Serial.println("Too close to obstacle, you need to drive forward!");
             } else {
-                car.setSpeed(bSpeed);
-                car.setAngle(0);
+                smartCar.setSpeed(bSpeed);
+                smartCar.setAngle(0);
                 if (insideRangeF==true || insideRangeF==true || insideRangeF==true ){
                 delay(1000);
                 insideRangeF=false;
@@ -300,8 +296,8 @@ void handleInput()
             }
             break;
         default: // if you receive something that you don't know, just stop
-            car.setSpeed(0);
-            car.setAngle(0);
+            smartCar.setSpeed(0);
+            smartCar.setAngle(0);
         }
     }
 }
