@@ -239,7 +239,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.279"
-                app:srcCompat="@drawable/arrow_up_darkpink" />
+                app:srcCompat="@drawable/orange_plus" />
 
             <ImageButton
                 android:id="@+id/speedDown"
@@ -251,7 +251,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.278"
-                app:srcCompat="@drawable/arrow_down_darkpink" />
+                app:srcCompat="@drawable/orange_minus" />
             <![CDATA[
 
             app:layout_constraintVertical_bias="0.015" />

@@ -38,11 +38,19 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="410dp"
                     android:fontFamily="monospace"
                     android:text="Current Speed:"
-                    android:textColor="#000000"
-                    android:textStyle="bold|italic"
-                    android:visibility="visible" />
+                    android:textColor="#FFF"
+                    android:textStyle="italic"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.784"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.176" />
             </RelativeLayout>
 
             <ImageView
@@ -227,7 +235,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.279"
-                app:srcCompat="@drawable/arrow_up_darkpink" />
+                app:srcCompat="@drawable/black_plus" />
 
             <ImageButton
                 android:id="@+id/speedDown"
@@ -239,7 +247,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.278"
-                app:srcCompat="@drawable/arrow_down_darkpink" />
+                app:srcCompat="@drawable/black_minus" />
 
             <![CDATA[
 
