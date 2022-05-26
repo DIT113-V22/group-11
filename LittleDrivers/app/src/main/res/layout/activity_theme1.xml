@@ -135,10 +135,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.948"
+                app:layout_constraintHorizontal_bias="0.287"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.278" />
+                app:layout_constraintVertical_bias="0.287" />
 
             <Switch
                 android:id="@+id/safeDrive"
@@ -162,14 +162,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="speed"
-                android:textStyle="italic"
                 android:textColor="#000"
+                android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.919"
+                app:layout_constraintHorizontal_bias="0.891"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.186" />
+                app:layout_constraintVertical_bias="0.204" />
 
             <TextView
                 android:id="@+id/distanceView"
@@ -207,15 +207,15 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:text="Current Speed:"
-                android:textStyle="bold"
                 android:textColor="#000"
+                android:textStyle="bold"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.833"
+                app:layout_constraintHorizontal_bias="0.798"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.186" />
+                app:layout_constraintVertical_bias="0.204" />
 
             <ImageButton
                 android:id="@+id/home1"
@@ -229,6 +229,30 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/darkpink_home" />
+
+            <ImageButton
+                android:id="@+id/speedUp"
+                android:layout_width="59dp"
+                android:layout_height="57dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.776"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.279"
+                app:srcCompat="@drawable/icons8_plus_50" />
+
+            <ImageButton
+                android:id="@+id/speedDown"
+                android:layout_width="61dp"
+                android:layout_height="56dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.916"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.278"
+                app:srcCompat="@drawable/icons8_minus_50" />
             <![CDATA[
 
             app:layout_constraintVertical_bias="0.015" />

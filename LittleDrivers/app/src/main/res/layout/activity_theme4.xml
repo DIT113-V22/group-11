@@ -137,10 +137,10 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.948"
+                app:layout_constraintHorizontal_bias="0.26"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.278" />
+                app:layout_constraintVertical_bias="0.309" />
 
             <Switch
                 android:id="@+id/safeDrive"
@@ -232,6 +232,34 @@
                 app:layout_constraintVertical_bias="0.019"
                 app:srcCompat="@drawable/red_home" />
 
+            <ImageButton
+                android:id="@+id/speedUp"
+                android:layout_width="59dp"
+                android:layout_height="57dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.776"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.279"
+                app:srcCompat="@drawable/red_plus" />
+
+            <ImageButton
+                android:id="@+id/speedDown"
+                android:layout_width="61dp"
+                android:layout_height="56dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.916"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.278"
+                app:srcCompat="@drawable/red_minus" />
+            <![CDATA[
+
+            app:layout_constraintVertical_bias="0.015" />
+
+        ]]>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

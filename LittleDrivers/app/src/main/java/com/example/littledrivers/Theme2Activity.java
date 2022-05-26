@@ -32,7 +32,7 @@ public class Theme2Activity extends AppCompatActivity {
     private static final String MQTT_SERVER = "tcp://" + LOCALHOST + ":1883";
     private static final String THROTTLE_CONTROL = "/LittleDrivers/control/throttle";
     private static final String STEERING_CONTROL = "/LittleDrivers/control/steering";
-    private static final int MOVEMENT_SPEED = 70;
+    private static int MOVEMENT_SPEED = 50;
     private static final int IDLE_SPEED = 0;
     private static final int STRAIGHT_ANGLE = 0;
     private static final int STEERING_ANGLE = 50;
@@ -61,6 +61,8 @@ public class Theme2Activity extends AppCompatActivity {
     private TextView distanceTextView;
 
     ImageButton button;
+    ImageButton speedUp;
+    ImageButton speedDown;
     private MediaPlayer mediaPlayer;
 
     @Override
@@ -91,6 +93,24 @@ public class Theme2Activity extends AppCompatActivity {
         distanceTextView = findViewById(R.id.distanceView);
         safeDrive = (Switch) findViewById(R.id.safeDrive);
         mediaPlayer = MediaPlayer.create(this, R.raw.beep);
+
+        speedUp = findViewById(R.id.speedUp);
+        speedUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMqttClient.publish("/LittleDrivers/speed/speedUp", "true", QOS, null);
+                MOVEMENT_SPEED+=10;
+            }
+        });
+        speedDown = findViewById(R.id.speedDown);
+        speedDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMqttClient.publish("/LittleDrivers/speed/speedDown", "true", QOS, null);
+                MOVEMENT_SPEED-=10;
+
+            }
+        });
         connectToMqttBroker();
 
         final JoystickJhr joystick = findViewById(R.id.joystick);
