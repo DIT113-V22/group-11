@@ -32,26 +32,23 @@
                 android:layout_height="484dp"
                 android:foreground="@drawable/baymaxbackground"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp">
+                tools:layout_editor_absoluteY="0dp"/>
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="410dp"
-                    android:fontFamily="monospace"
-                    android:text="Current Speed:"
-                    android:textColor="#FFF"
-                    android:textStyle="italic"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.784"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.176" />
-            </RelativeLayout>
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:text="Current Speed:"
+                android:textColor="#020202"
+                android:textStyle="bold|italic"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.784"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.11" />
 
             <ImageView
                 android:id="@+id/imageView"
