@@ -59,6 +59,7 @@ ESPRESSO is going to be used to test the application.
 ## MQTT
 Mosquitto is an MQTT broker that allows different systems to communicate with each other by sending and recieving messages. 
 The broker receives messages published by client and filters them by topic and then hands out these messages depending on what topic the clients subribed to.
+
 So essentialy you have two different types of clients, subcribers and publishers. They both rely on a broker to be able to communicate with each other, the broker act as the middle man as it take on the responsibilites of receiving and handing out messages. The implementation is further down. 
 
 ## smartcar.ino
