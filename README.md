@@ -94,7 +94,7 @@ You will be greeted with a home screen where you can choose which one of the fou
 
 ![Skärmbild 2022-05-28 133810](https://user-images.githubusercontent.com/102026776/170823856-c90d9d50-3b9c-4c17-9158-a0a1f881d438.png)
 
-After choosing your theme a new screen will pop up and there will be  a message that says that you are connected to the mqtt broker. You will also be able to see a first person view of the emulators enviroment through the application. 
+After choosing your theme a new screen will pop up and there will be a message that says that you are connected to the mqtt broker. You will also be able to see a first person view of the emulators enviroment through the application. 
 
 ![Skärmbild 2022-05-28 134135](https://user-images.githubusercontent.com/102026776/170823980-376f2b77-3c9c-41d8-9759-06f4a89d5238.png)
 
