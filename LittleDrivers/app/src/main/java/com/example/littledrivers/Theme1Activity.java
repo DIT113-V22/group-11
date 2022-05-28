@@ -47,7 +47,6 @@ public class Theme1Activity extends AppCompatActivity {
     boolean insideRangeL = false;
     String speed;
     String distance;
-    int newSpeed=0;
 
     private MqttClient mMqttClient;
     private boolean isConnected = false;
@@ -105,8 +104,10 @@ public class Theme1Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mMqttClient.publish("/LittleDrivers/speed/speedDown", "true", QOS, null);
-                MOVEMENT_SPEED-=10;
-
+                MOVEMENT_SPEED-= 10;
+                if (MOVEMENT_SPEED < 0){
+                    MOVEMENT_SPEED = 0;
+                }
             }
         });
         connectToMqttBroker();
