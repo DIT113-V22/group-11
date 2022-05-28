@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -64,6 +65,7 @@ public class Theme1Activity extends AppCompatActivity {
     ImageButton button;
     ImageButton speedUp;
     ImageButton speedDown;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class Theme1Activity extends AppCompatActivity {
         speedTextView = findViewById(R.id.speedView);
         distanceTextView = findViewById(R.id.distanceView);
         safeDrive = (Switch) findViewById(R.id.safeDrive);
+        mediaPlayer = MediaPlayer.create(this, R.raw.beep);
 
         speedUp = findViewById(R.id.speedUp);
         speedUp.setOnClickListener(new View.OnClickListener() {
@@ -128,8 +131,11 @@ public class Theme1Activity extends AppCompatActivity {
         joystick.setOnTouchListener((view, motionEvent) -> {
                     if(insideRangeR || insideRangeB || insideRangeL || insideRangeF){
                         warningMessage.setVisibility(View.VISIBLE);
+                        mediaPlayer.start();
+                        mediaPlayer.setLooping(true);
                     } else {
                         warningMessage.setVisibility(View.INVISIBLE);
+                        mediaPlayer.setLooping(false);
                     }
                     joystick.move(motionEvent);
                     joystick.joyX();
