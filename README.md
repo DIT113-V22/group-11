@@ -32,8 +32,75 @@ SMCE is the emulator in which the car is driven.
 ESPRESSO is going to be used to test the application.
 
 # SETUP
+## STEP 1: Download and installation 
+
+Android studio: https://developer.android.com/studio
+
+SMCE emulator for windows: https://github.com/ItJustWorksTM/smce-gd/wiki/Windows-setup
+
+SMCE emulator for MacOS: https://github.com/ItJustWorksTM/smce-gd/wiki/MacOS-setup
+
+Mosquitto(MQTT): https://mosquitto.org/download/ 
+
+## STEP 2: Setting up mosquitto broker 
+
+To start the mosquitto broker you first have to run `command promt` as an administrator, then change the directory to mosquitto and type the command `mosquitto -v` to get mosquitto running. 
+
+
+![Skärmbild 2022-05-28 110618](https://user-images.githubusercontent.com/102026776/170818866-55a6d62a-07f7-4e75-9745-9200d22465a3.png)
+
+## STEP 3: Downloading the application 
+
+Clone the project from our homepage: https://github.com/DIT113-V22/group-11
+
+![Skärmbild 2022-05-28 111600](https://user-images.githubusercontent.com/102026776/170819106-fc97fadf-1671-46de-a606-abccdd271e07.png)
+
+
+
+
+
+
+Afterwards you have to open Android studios and click on `Get from VCS`, paste the cloned project link there and press `clone`. 
+
+![Skärmbild 2022-05-28 112507](https://user-images.githubusercontent.com/102026776/170819436-cb44b0b3-a00c-4e91-897d-be1f5f54aed8.png)
+
+
+## STEP 4: Getting started with the emulator
+
+After you have succesfully installed the SMCE emulator, start up the emulator and press on `start fresh`. Then press on the `+` icon and after that on `add new`.
+
+![Skärmbild 2022-05-28 114222](https://user-images.githubusercontent.com/102026776/170820016-8d17cae3-993e-4873-a50c-5f5e04f3101d.png)
+
+Then you have to find the smartcar.ino file that's located under `arduino` in the file that you cloned. 
+
+![Skärmbild 2022-05-28 114557](https://user-images.githubusercontent.com/102026776/170820103-3c351346-b1af-4608-8112-32b6852c3d08.png)
+
+Then you simply press open and select the sketch you want to run. 
+
+![Skärmbild 2022-05-28 150955](https://user-images.githubusercontent.com/102026776/170827080-9d97a95e-d3bb-448f-ada9-1c534c3811cc.png)
+
+Compile the sketch and then press start to get started. 
+
+![Skärmbild 2022-05-28 151125](https://user-images.githubusercontent.com/102026776/170827265-775da634-cc58-4c60-b9bd-5d2b37233b1d.png)
 
 # GET STARTED
+To play the game, you have to have both the emulator and android studios running. You also have to have a device that you can run the application on, here is a good guide for that: https://developers.foxit.com/developer-hub/document/create-an-emulator-for-testing-in-android-studio/#:~:text=In%20Android%20Studio%20go%20to,on%20the%20%E2%80%9CNext%E2%80%9D%20button
+
+The mosquitto broker should be running in the background so what you have to do is simply have the smartcar sketch running on the emulator and then on android studios you press the run button after you have created your device. 
+
+![Skärmbild 2022-05-28 133641](https://user-images.githubusercontent.com/102026776/170823817-9bf95fe6-cab5-47bc-be8b-db7230075c49.png)
+
+You will be greeted with a home screen where you can choose which one of the four themes you would like to play on. 
+
+![Skärmbild 2022-05-28 133810](https://user-images.githubusercontent.com/102026776/170823856-c90d9d50-3b9c-4c17-9158-a0a1f881d438.png)
+
+After choosing your theme a new screen will pop up and there will be where a message that says that you are connected to mqtt and you will also be able to see a first person view of the emulators enviroment through the application. 
+
+![Skärmbild 2022-05-28 134135](https://user-images.githubusercontent.com/102026776/170823980-376f2b77-3c9c-41d8-9759-06f4a89d5238.png)
+
+After this you are ready to play the game. 
+
+For more information abou thow to play the game, please visit our wiki: https://github.com/DIT113-V22/group-11/wiki/Instructions
 
 # FEATURES
 - Different themes: 
@@ -55,4 +122,3 @@ ESPRESSO is going to be used to test the application.
   - There will be two buttons on each theme screen that allows the players to control the speed of the car. The speed is changed in increments of 10 with the minimum speed being 0 and maximum speed being 100 m/s.  
 
 # SOFTWARE ARCHITECTURE
-
