@@ -117,8 +117,6 @@ public class Theme4Activity extends AppCompatActivity {
 
         safeDrive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // do something, the isChecked will be
-                // true if the switch is in the On position
                 if (safeDrive.isChecked()) {
                     mMqttClient.publish("/LittleDrivers/obstacleAvoidance/toggle", "true", QOS, null);
                 } else if (!safeDrive.isChecked()) {
@@ -340,7 +338,6 @@ public class Theme4Activity extends AppCompatActivity {
                     Log.i(TAG, successfulConnection);
                     Toast.makeText(getApplicationContext(), successfulConnection, Toast.LENGTH_SHORT).show();
 
-                    mMqttClient.subscribe("/LittleDrivers/ultrasound/front", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/camera", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/insiderange/#", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/Odometer/speed", QOS, null);

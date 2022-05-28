@@ -93,7 +93,6 @@ Serial.println("Connecting to WiFi...");
 mqtt.subscribe("/LittleDrivers/insiderange/#", 1);
 mqtt.subscribe("/LittleDrivers/control/#", 1);
 mqtt.subscribe("/LittleDrivers/obstacleAvoidance/toggle", 1);
-mqtt.subscribe("/LittleDrivers/speed/#");
 
 
 mqtt.onMessage([](String topic, String message) {
@@ -130,11 +129,7 @@ mqtt.onMessage([](String topic, String message) {
             } else if(message.equals("true")){
                 toggleOn=true;
                 }
-    } else if(topic=="/LittleDrivers/speed/speedUp") {
-            Serial.println("+10");
-    } else if(topic=="/LittleDrivers/speed/speedDown") {
-          Serial.println("-10");
-    }else {
+    } else {
       Serial.println(topic + " " + message);
     }
   });
@@ -165,17 +160,11 @@ if (mqtt.connected()) {
                    false, 0);
     }
 #endif
- static auto previousTransmission = 0UL;
-    if (currentTime - previousTransmission >= oneSecond) {
-      previousTransmission = currentTime;
-      const auto distance = String(front.getDistance());
-            mqtt.publish("/LittleDrivers/ultrasound/front", distance);
-          }
         }
 
 //------- To show speed and total distance travelled on app -------
  speed = String(smartCar.getSpeed());
- mqtt.publish("/LittleDrivers/Odometer/speed",speed);
+ mqtt.publish("/LittleDrivers/odometer/speed",speed);
  distance = String (smartCar.getDistance()/100);
  mqtt.publish("/LittleDrivers/odometer/distance", distance);
 
