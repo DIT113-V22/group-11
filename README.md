@@ -74,7 +74,14 @@ Furthermore, smartcar.ino publishes to:
 - /LittleDrivers/odometer/speed: to send data of the current speed 
 - /LittleDrivers/odometer/distance: to send data of the total distance traveled
 
-## HomeActivity.java
+## HomeActivity.java and theme screens
+
+The application starts off by showing SplashActivity.java with our logo on it. After a delay of 3 seconds, using startActivity(), android studio is asked to switch from splash screen to home screen, which shows HomeActivity.java. Home screen consists of 4 image buttons that lead to 4 different loading screens. HomeActivity.java recognises the image button’s ids (which is mentioned on its xml file) and using the setOnClickListener(), each image button leads to its very own loading screen.
+
+The loading screen then calls upon progressAnimation() and through intent, the screen displays the theme screen after displaying the loading screen.
+
+Each theme screen contains a toggle switch, camera feed, joystick, warning message pop-up, speed incremental buttons, distance and speed display. Once the switch is turned on, the toggleOn variable in the smartcar.ino file becomes true, which then lets the car stop within the specified distance. The warning message works the same way, it pops up on the screen when the car is within the range of the obstacle. 
+
 
 ## NavigationTest.kt
 
