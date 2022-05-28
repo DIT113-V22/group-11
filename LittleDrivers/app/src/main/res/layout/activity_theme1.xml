@@ -240,7 +240,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.279"
-                app:srcCompat="@drawable/icons8_plus_50" />
+                app:srcCompat="@drawable/icons8_plus_50"
+                android:background="@color/cardview_shadow_end_color"/>
 
             <ImageButton
                 android:id="@+id/speedDown"
@@ -252,7 +253,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.278"
-                app:srcCompat="@drawable/icons8_minus_50" />
+                app:srcCompat="@drawable/icons8_minus_50"
+                android:background="@color/cardview_shadow_end_color"/>
             <![CDATA[
 
             app:layout_constraintVertical_bias="0.015" />
