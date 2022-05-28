@@ -16,8 +16,8 @@ const char ssid[] = "***";
 const char pass[] = "****";
 
 int fSpeed   = 50;  // 50% of the full speed forward
-int bSpeed   = -50; // 50% of the full speed backward
-int lDegrees = -50; // degrees to turn left
+int bSpeed   = 0; // 50% of the full speed backward
+int lDegrees = 0; // degrees to turn left
 int rDegrees = 50;  // degrees to turn right
 const unsigned long transmissionInterval = 100; // In milliseconds
 const auto pulsesPerMeter = 600;
@@ -134,6 +134,10 @@ mqtt.onMessage([](String topic, String message) {
             Serial.println("+10");
     } else if(topic=="/LittleDrivers/speed/speedDown") {
           Serial.println("-10");
+          if (speed <=0){
+          smartCar.setSpeed(0);
+          speed = 0;
+          }
     }else {
       Serial.println(topic + " " + message);
     }
@@ -151,7 +155,7 @@ const auto rdistance = right.getDistance();
 const auto ldistance = left.getDistance();
 
 String distance = "";
-String speed = "";
+String speedString = "";
 //------- Camera -------
 if (mqtt.connected()) {
     mqtt.loop();
@@ -174,8 +178,8 @@ if (mqtt.connected()) {
         }
 
 //------- To show speed and total distance travelled on app -------
- speed = String(smartCar.getSpeed());
- mqtt.publish("/LittleDrivers/Odometer/speed",speed);
+ speedString = String(smartCar.getSpeed());
+ mqtt.publish("/LittleDrivers/Odometer/speed",speedString);
  distance = String (smartCar.getDistance()/100);
  mqtt.publish("/LittleDrivers/odometer/distance", distance);
 
@@ -228,22 +232,21 @@ void handleInput()
         switch (input)
         {
          case 'u': // change speed to 30
-                  smartCar.setSpeed(30);
-                  Serial.println("The speed of the car has been set to 30!");
-                break;
-                case 'i': // change speed to 50
-                  smartCar.setSpeed(50);
-                  Serial.println("The speed of the car has been set to 50!");
-                break;
-                case 'o': // change speed to 70
-                  smartCar.setSpeed(70);
-                  Serial.println("The speed of the car has been set to 70!");
-                break;
-        case 'a': // rotate counter-clockwise going forward
-        if(insideRangeL==true || insideRangeF==true){
-                smartCar.setSpeed(0);
-                Serial.println("Too close to obstacle!");
-            } else{
+               speed += 10;
+               fSpeed = speed;
+               Serial.println("The car has sped up.");
+               mqtt.publish("/LittleDrivers/speed/speedUp", "true");
+         break;
+         case 'i': // change speed to 50
+               speed -= 10;
+               fSpeed = speed;
+               Serial.println("The car has sped down.");
+               mqtt.publish("/LittleDrivers/speed/speedDown", "true");
+         case 'a': // rotate counter-clockwise going forward
+         if(insideRangeL==true || insideRangeF==true){
+               smartCar.setSpeed(0);
+               Serial.println("Too close to obstacle!");
+         } else{
                 smartCar.setSpeed(fSpeed);
                 smartCar.setAngle(lDegrees);
                 if(insideRangeR==true || insideRangeB==true){
@@ -251,8 +254,8 @@ void handleInput()
                 insideRangeR=false;
                 insideRangeB=false;
                 }
-            }
-            break;
+         }
+         break;
         case 'd': // turn clock-wise
         if(insideRangeR==true || insideRangeF==true){
                 smartCar.setSpeed(0);
