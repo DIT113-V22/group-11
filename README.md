@@ -56,3 +56,25 @@ ESPRESSO is going to be used to test the application.
 
 # SOFTWARE ARCHITECTURE
 
+## MQTT
+
+## smartcar.ino
+
+This is an Arduino Sketch that uses the programming language C++ and contains all the functionalities of the car. The car is equipped with four ultrasonic sensors, two odometers and a camera in first person POV. The ultrasonic sensors are used to detect obstacles all around the car and determine when the car should be stopped. The odometers are used to retrieve the total distance traveled and its current speed. The file also implements the MQTT protocol to communicate with the Android application. To handle these messages received through the broker the method mqtt.onMessage() is used. The subscriptions include:
+- /LittleDrivers/insiderange/# (which includes front, back, left, right): to trigger the obstacle avoidance at the right times
+- /LittleDrivers/control/#: to steer the car in the right direction and with the right speed
+- /LittleDrivers/obstacleAvoidance/toggle: to know when the ‘Safe drive’ switch is on or off
+
+Furthermore, smartcar.ino publishes to:
+- /LittleDrivers/insiderange/# (which includes front, back, left, right): to make the joystick “aware” of where it can steer with the obstacle avoidance enabled
+- /LittleDrivers/camera: to send frame data to the application which keeps the camera feed updated
+- /LittleDrivers/odometer/speed: to send data of the current speed 
+- /LittleDrivers/odometer/distance: to send data of the total distance traveled
+
+## HomeActivity.java
+
+## NavigationTest.kt
+
+This kotlin class is responsible for the navigational tests between the screens. All the tests were made using espresso, a testing framework to make easy and reliable UI (user interface) tests. The tests ensure that the buttons for moving from one page to the other work properly and don’t go to an unwanted page. For example, the home button on every theme of our application is made so that the user can easily access the home page and the 4 of these test makes sure that if the home button is clicked it goes to the homepage. The test is done by first launching the screen which is done by recognizing the screen’s id given in the xml file, then the button to be tested is pressed using the onClick method. The test then checks if the correct screen is displayed by using the method isDisplayed and putting the screen’s id in its parameter.
+
+The CI for instrumented tests in GitHub makes it easy to test as we don’t need to test manually by running them in android studios, instead, they are tested when the code is committed and pushed.
