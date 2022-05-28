@@ -51,10 +51,6 @@ public class Theme3Activity extends AppCompatActivity {
     private MqttClient mMqttClient;
     private boolean isConnected = false;
     private ImageView mCameraView;
-
-    private TextView angleTextView;
-    private TextView powerTextView;
-    private TextView directionTextView;
     private TextView warningMessage;
     private Switch safeDrive;
     private TextView speedTextView;
@@ -285,19 +281,6 @@ public class Theme3Activity extends AppCompatActivity {
                         }
 
                     }
-
-
-
-
-       /* angleTextView = (TextView) findViewById(R.id.angleTextView);
-        powerTextView = (TextView) findViewById(R.id.powerTextView);
-        directionTextView = (TextView) findViewById(R.id.directionTextView);*/
-                    //Referencing also other views
-                    //joystick = (JoystickView) findViewById(R.id.joystickView);
-
-                    //Event listener that always returns the variation of the angle in degrees, motion power in percentage and direction of movement
-
-
                     return true;
                 }
         );
