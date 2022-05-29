@@ -104,7 +104,9 @@ public class Theme4Activity extends AppCompatActivity {
             public void onClick(View view) {
                 mMqttClient.publish("/LittleDrivers/speed/speedDown", "true", QOS, null);
                 MOVEMENT_SPEED-=10;
-
+                if (MOVEMENT_SPEED < 0){
+                    MOVEMENT_SPEED = 0;
+                }
             }
         });
         connectToMqttBroker();
