@@ -16,8 +16,8 @@ const char ssid[] = "***";
 const char pass[] = "****";
 
 int fSpeed   = 50;  // 50% of the full speed forward
-int bSpeed   = 0; // 50% of the full speed backward
-int lDegrees = 0; // degrees to turn left
+int bSpeed   = -50; // 50% of the full speed backward
+int lDegrees = -50; // degrees to turn left
 int rDegrees = 50;  // degrees to turn right
 const unsigned long transmissionInterval = 100; // In milliseconds
 const auto pulsesPerMeter = 600;
