@@ -16,8 +16,8 @@ const char ssid[] = "***";
 const char pass[] = "****";
 
 int fSpeed   = 50;  // 50% of the full speed forward
-int bSpeed   = 0; // 50% of the full speed backward
-int lDegrees = 0; // degrees to turn left
+int bSpeed   = -50; // 50% of the full speed backward
+int lDegrees = -50; // degrees to turn left
 int rDegrees = 50;  // degrees to turn right
 const unsigned long transmissionInterval = 100; // In milliseconds
 const auto pulsesPerMeter = 600;
@@ -93,7 +93,6 @@ Serial.println("Connecting to WiFi...");
 mqtt.subscribe("/LittleDrivers/insiderange/#", 1);
 mqtt.subscribe("/LittleDrivers/control/#", 1);
 mqtt.subscribe("/LittleDrivers/obstacleAvoidance/toggle", 1);
-mqtt.subscribe("/LittleDrivers/speed/#");
 
 
 mqtt.onMessage([](String topic, String message) {
@@ -129,16 +128,15 @@ mqtt.onMessage([](String topic, String message) {
                 toggleOn=false;
             } else if(message.equals("true")){
                 toggleOn=true;
-                }
-    } else if(topic=="/LittleDrivers/speed/speedUp") {
-            Serial.println("+10");
-    } else if(topic=="/LittleDrivers/speed/speedDown") {
-          Serial.println("-10");
-          if (speed <=0){
-          smartCar.setSpeed(0);
-          speed = 0;
-          }
-    }else {
+            }
+    } else if(topic=="/LittleDrivers/obstacleAvoidance/toggle"){
+            smartCar.setSpeed(speed);
+    } else if(topic=="/LittleDrivers/obstacleAvoidance/toggle"){
+            if (speed <=0){
+                smartCar.setSpeed(0);
+                speed = 0;
+            }
+    } else {
       Serial.println(topic + " " + message);
     }
   });
@@ -169,17 +167,11 @@ if (mqtt.connected()) {
                    false, 0);
     }
 #endif
- static auto previousTransmission = 0UL;
-    if (currentTime - previousTransmission >= oneSecond) {
-      previousTransmission = currentTime;
-      const auto distance = String(front.getDistance());
-            mqtt.publish("/LittleDrivers/ultrasound/front", distance);
-          }
         }
 
 //------- To show speed and total distance travelled on app -------
  speedString = String(smartCar.getSpeed());
- mqtt.publish("/LittleDrivers/Odometer/speed",speedString);
+ mqtt.publish("/LittleDrivers/odometer/speed",speedString);
  distance = String (smartCar.getDistance()/100);
  mqtt.publish("/LittleDrivers/odometer/distance", distance);
 
@@ -211,96 +203,10 @@ if (ldistance > 0 && ldistance < 60 && insideRangeL==false) {
     }
 }
 
-handleInput();
-
 #ifdef __SMCE__
   // Avoid over-using the CPU if we are running in the emulator
   delay(1);
 
 #endif
 
-}
-
-//------- Controls car through serial -------
-void handleInput()
-{ // handle serial input if there is any
-    if (Serial.available())
-    {
-        char input = Serial.read(); // read everything that has been received so far and log down
-                                    // the last entry
-
-        switch (input)
-        {
-         case 'u': // change speed to 30
-               speed += 10;
-               fSpeed = speed;
-               Serial.println("The car has sped up.");
-               mqtt.publish("/LittleDrivers/speed/speedUp", "true");
-         break;
-         case 'i': // change speed to 50
-               speed -= 10;
-               fSpeed = speed;
-               Serial.println("The car has sped down.");
-               mqtt.publish("/LittleDrivers/speed/speedDown", "true");
-         case 'a': // rotate counter-clockwise going forward
-         if(insideRangeL==true || insideRangeF==true){
-               smartCar.setSpeed(0);
-               Serial.println("Too close to obstacle!");
-         } else{
-                smartCar.setSpeed(fSpeed);
-                smartCar.setAngle(lDegrees);
-                if(insideRangeR==true || insideRangeB==true){
-                delay(1000);
-                insideRangeR=false;
-                insideRangeB=false;
-                }
-         }
-         break;
-        case 'd': // turn clock-wise
-        if(insideRangeR==true || insideRangeF==true){
-                smartCar.setSpeed(0);
-                Serial.println("Too close to obstacle!");
-            } else {
-                smartCar.setSpeed(fSpeed);
-                smartCar.setAngle(rDegrees);
-                if(insideRangeL==true || insideRangeL==true){
-                delay(1000);
-                insideRangeL=false;
-                insideRangeB=false;
-                }
-            }
-            break;
-        case 'w': // go ahead
-        if(insideRangeF==true || insideRangeR==true || insideRangeL==true){
-                smartCar.setSpeed(0);
-                Serial.println("Too close to obstacle, you need to reverse!");
-            } else {
-                smartCar.setSpeed(fSpeed);
-                smartCar.setAngle(0);
-                if (insideRangeB==true) {
-                delay(1000);
-                insideRangeB=false;
-                }
-            }
-            break;
-        case 's': // go back
-        if(insideRangeB==true){
-                smartCar.setSpeed(0);
-                Serial.println("Too close to obstacle, you need to drive forward!");
-            } else {
-                smartCar.setSpeed(bSpeed);
-                smartCar.setAngle(0);
-                if (insideRangeF==true || insideRangeF==true || insideRangeF==true ){
-                delay(1000);
-                insideRangeF=false;
-                insideRangeR=false;
-                insideRangeL=false;
-                }
-            }
-            break;
-        default: // if you receive something that you don't know, just stop
-            smartCar.setSpeed(0);
-            smartCar.setAngle(0);
-        }
-    }
 }

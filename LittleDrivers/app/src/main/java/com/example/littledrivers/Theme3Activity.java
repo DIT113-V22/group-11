@@ -51,10 +51,6 @@ public class Theme3Activity extends AppCompatActivity {
     private MqttClient mMqttClient;
     private boolean isConnected = false;
     private ImageView mCameraView;
-
-    private TextView angleTextView;
-    private TextView powerTextView;
-    private TextView directionTextView;
     private TextView warningMessage;
     private Switch safeDrive;
     private TextView speedTextView;
@@ -119,8 +115,6 @@ public class Theme3Activity extends AppCompatActivity {
 
         safeDrive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // do something, the isChecked will be
-                // true if the switch is in the On position
                 if (safeDrive.isChecked()) {
                     mMqttClient.publish("/LittleDrivers/obstacleAvoidance/toggle", "true", QOS, null);
                 } else if (!safeDrive.isChecked()) {
@@ -289,19 +283,6 @@ public class Theme3Activity extends AppCompatActivity {
                         }
 
                     }
-
-
-
-
-       /* angleTextView = (TextView) findViewById(R.id.angleTextView);
-        powerTextView = (TextView) findViewById(R.id.powerTextView);
-        directionTextView = (TextView) findViewById(R.id.directionTextView);*/
-                    //Referencing also other views
-                    //joystick = (JoystickView) findViewById(R.id.joystickView);
-
-                    //Event listener that always returns the variation of the angle in degrees, motion power in percentage and direction of movement
-
-
                     return true;
                 }
         );
@@ -342,7 +323,6 @@ public class Theme3Activity extends AppCompatActivity {
                     Log.i(TAG, successfulConnection);
                     Toast.makeText(getApplicationContext(), successfulConnection, Toast.LENGTH_SHORT).show();
 
-                    mMqttClient.subscribe("/LittleDrivers/ultrasound/front", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/camera", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/insiderange/#", QOS, null);
                     mMqttClient.subscribe("/LittleDrivers/Odometer/speed", QOS, null);
