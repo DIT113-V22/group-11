@@ -165,7 +165,7 @@
                 android:textColor="#FFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.879"
+                app:layout_constraintHorizontal_bias="0.918"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.176" />
@@ -178,10 +178,10 @@
                 android:textColor="#FFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.873"
+                app:layout_constraintHorizontal_bias="0.955"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.097" />
+                app:layout_constraintVertical_bias="0.089" />
 
             <TextView
                 android:id="@+id/Distance"
@@ -194,7 +194,7 @@
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.734"
+                app:layout_constraintHorizontal_bias="0.779"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.096" />
@@ -239,7 +239,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.279"
-                app:srcCompat="@drawable/orange_plus" />
+                app:srcCompat="@drawable/orange_plus"
+                android:background="@color/cardview_shadow_end_color"/>
 
             <ImageButton
                 android:id="@+id/speedDown"
@@ -251,7 +252,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.278"
-                app:srcCompat="@drawable/orange_minus" />
+                app:srcCompat="@drawable/orange_minus"
+                android:background="@color/cardview_shadow_end_color"/>
             <![CDATA[
 
             app:layout_constraintVertical_bias="0.015" />
