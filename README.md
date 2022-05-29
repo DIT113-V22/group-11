@@ -159,3 +159,8 @@ This kotlin class is responsible for the navigational tests between the screens.
 
 The CI for instrumented tests in GitHub makes it easy to test as we don’t need to test manually by running them in android studios, instead, they are tested when the code is committed and pushed.
 
+# DEMO VIDEO
+
+To visualize our application and its features better we suggest you check out this link to a demo video!
+https://youtu.be/UY2wNPTg5l4
+
